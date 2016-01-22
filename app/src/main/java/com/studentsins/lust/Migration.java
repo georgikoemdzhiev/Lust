@@ -23,7 +23,9 @@ public class Migration implements RealmMigration {
             // Create a new class
             schema.create("UserCredentials")
                     .addField("isUserLoggedIn", Boolean.class)
-                    .addField("userUUID", String.class);
+                    .addField("userUUID", String.class)
+                    .addField("token", String.class)
+                    .addPrimaryKey("userEmail");
 
             oldVersion++;
         }

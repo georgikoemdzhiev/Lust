@@ -4,10 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -22,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import io.realm.Realm;
@@ -40,12 +43,12 @@ import okhttp3.Response;
 public class LoginActivity extends AppCompatActivity implements Callback {
     private Realm realm;
     RealmResults<UserCredentials> mUserCredentialses;
-    public static final MediaType JSON
-            = MediaType.parse("application/json; charset=utf-8");
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private Boolean isPostRequestSuccessful = false;
     Boolean isSuccessfulLogin = false;
-    String udid = "c376e418-da42-39fb-0000-d821f1fd2804";
-
+    String udid = "";
+    //Stores the user email after it has been verified as an email - containing '@' symbol
+    private String userEmailVerified;
     private static final String TAG = LoginActivity.class.getSimpleName();
     // UI references.
     private EditText mEmailView;
@@ -58,8 +61,23 @@ public class LoginActivity extends AppCompatActivity implements Callback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //get the shared preferences to retrieve the udid
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
         //get the default database
         realm = Realm.getDefaultInstance();
+        //generate a random uuid if this is the first time the user opens the app...
+        if(sharedPreferences.getString(Constants.USERS_UDID, "").equals("")) {
+            udid = UUID.randomUUID().toString();
+            editor.putString(Constants.USERS_UDID, udid);
+            editor.apply();
+        }else{
+            //if this is not the first time... i.e. we have a UDID stored -> retrive it...
+            udid = sharedPreferences.getString(Constants.USERS_UDID, "");
+        }
+
+        //finds all the users
         mUserCredentialses = realm.where(UserCredentials.class).findAll();
         // Set up the login form.
         mEmailView = (EditText) findViewById(R.id.email);
@@ -132,29 +150,13 @@ public class LoginActivity extends AppCompatActivity implements Callback {
             // form field with an error.
             focusView.requestFocus();
         } else {
+            userEmailVerified = mEmailView.getText().toString();
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             if(isNetworkAvailable()) {
                 showProgress(true);
                 final JSONObject myJson = new JSONObject();
                 try {
-                    //generate random uuid...
-                    udid = UUID.randomUUID().toString();
-                    //if this is the firs time the user logs in - i.e. the udid is not stored ...
-                    if(mUserCredentialses.size() == 0) {
-                        //create a new record in the db and store the new udid
-                        Log.d(TAG,"mUserCredentials size is 0");
-                        realm.beginTransaction();
-                        UserCredentials user = realm.createObject(UserCredentials.class); // Create a new object
-                        user.setUserUUID(udid);
-                        realm.commitTransaction();
-                        //if the user exists...
-                    }else{
-                        //read the udid
-                        udid = mUserCredentialses.get(0).getUserUUID();
-                        Log.d(TAG,"mUserCredentials size is 1 \nNew User udid is: "+ udid);
-                    }
-
                     myJson.put("udid", udid);
                     myJson.put("email", mEmailView.getText().toString());
                     myJson.put("password", mPasswordView.getText().toString());
@@ -246,29 +248,39 @@ public class LoginActivity extends AppCompatActivity implements Callback {
                  final JSONObject responseJson = new JSONObject(response.body().string());
                 isSuccessfulLogin = responseJson.getBoolean("success");
                 message = responseJson.getString("message");
-
                 Log.d(TAG, "Response message: " + message);
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if (isSuccessfulLogin) {
+                            String token = null;
                             try {
-                                String token = responseJson.getString("token");
-                                Log.d(TAG, "Response token: " + token);
+                                token = responseJson.getString("token");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            //save the user as logged in to the db...
+                            Log.d(TAG, "Response token: " + token);
 
-                                UserCredentials toEdit = realm.where(UserCredentials.class).findAll().get(0);
-                                realm.beginTransaction();
-                                toEdit.setIsUserLoggedIn(true);
-                                realm.commitTransaction();
-                                Log.d(TAG, "iS USER LOGGED IN: " + mUserCredentialses.get(0).getIsUserLoggedIn());
+                            Log.d(TAG, "users size is: " + mUserCredentialses.size());
+                            //create a new record in the db and store the udid...
+                            UserCredentials newEntry = new UserCredentials();
+                            newEntry.setUserEmail(userEmailVerified);
+                            newEntry.setIsUserLoggedIn(true);
+                            newEntry.setToken(token);
+                            newEntry.setUserUUID(udid);
+                            realm.beginTransaction();
+                            //clear previous users...
+                            mUserCredentialses.clear();
+                            realm.copyToRealmOrUpdate(newEntry);
+                            realm.commitTransaction();
+
+                            Log.d(TAG,"users size is: " + mUserCredentialses.size());
 
 
-                            Toast.makeText(LoginActivity.this, "Login Successful!" + message, Toast.LENGTH_LONG).show();
+
+                            Toast.makeText(LoginActivity.this, "Login Successful! toEdit size: " + mUserCredentialses.size() + message, Toast.LENGTH_LONG).show();
+                            logUserInfo();
                             navigateToApp();
                         } else {
                             message = "This email or password is incorrect";
@@ -320,19 +332,19 @@ public class LoginActivity extends AppCompatActivity implements Callback {
 
     private void showErrorConnectingToServerDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-        builder.setTitle("Connection Unsuccessful");
-        builder.setMessage("There was an error connecting to the server.Please, try again later.");
-        builder.setPositiveButton("OK", null);
+        builder.setTitle(getString(R.string.error_dialog_title_connection_to_server));
+        builder.setMessage(getString(R.string.error_dialog_message_connection_to_server));
+        builder.setPositiveButton(getString(R.string.error_dialog_positive_button_connection_to_server), null);
         AlertDialog dialog = builder.show();
         dialog.show();
     }
 
     private void showIncorrectUsernameOrPasswordDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-        builder.setTitle("Login Unsuccessful");
-        builder.setMessage("There was an error login you in."+message+"!/nNOTE:Please make sure" +
+        builder.setTitle(getString(R.string.error_dialog_title_incorrect_credentials));
+        builder.setMessage("There was an error while logging you in. "+message+"!\nNOTE:Please make sure" +
                 " that the account is activated -> check your email.");
-        builder.setPositiveButton("OK", null);
+        builder.setPositiveButton(getString(R.string.error_dialog_positive_button_connection_to_server), null);
         AlertDialog dialog = builder.show();
         dialog.show();
     }
@@ -343,6 +355,18 @@ public class LoginActivity extends AppCompatActivity implements Callback {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
+    }
+
+    private void logUserInfo(){
+        List<UserCredentials> userCredentials = realm.where(UserCredentials.class).findAll();
+        for (UserCredentials uc :userCredentials){
+            Log.d(TAG,"*********USER*******************");
+            Log.d(TAG,"user UUID: " + uc.getUserUUID());
+            Log.d(TAG,"is user logged in: " + uc.getIsUserLoggedIn());
+            Log.d(TAG,"user token: " + uc.getToken());
+            Log.d(TAG,"user email: " + uc.getUserEmail());
+            Log.d(TAG,"*******END OF THIS USER*********");
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Lust</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">Log in</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -12,8 +12,10 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+
     <string name="action_logout">Log Out</string>
+    <string name="error_dialog_title_connection_to_server">Connection Unsuccessful!</string>
+    <string name="error_dialog_message_connection_to_server">There was an error connecting to the server.Please, try again later.</string>
+    <string name="error_dialog_positive_button_connection_to_server">OK</string>
+    <string name="error_dialog_title_incorrect_credentials">Login Unsuccessful!</string>
 </resources>

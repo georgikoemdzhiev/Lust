@@ -4,36 +4,35 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = MainActivity.class.getSimpleName();
     private Realm realm;
-    private UserCredentials userCredentials;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        realm = Realm.getDefaultInstance();
-        RealmResults<UserCredentials> userCredentialses = realm.where(UserCredentials.class).findAll();
 
-        if (userCredentialses.size() == 0){
+        realm = Realm.getDefaultInstance();
+//        Log.d(TAG,"LAST USER LOGGED INL " + lastUserLoggedin);
+
+       UserCredentials mCurrentUser = realm.where(UserCredentials.class).findFirst();
+        if(mCurrentUser == null){
+            navigateToLogin();
+        }else if (!mCurrentUser.getIsUserLoggedIn()){
             navigateToLogin();
         }
 
-        if(userCredentialses.size() > 0) {
-            userCredentials = userCredentialses.get(0);
-            //if the user is not logged in already...
-            if(!userCredentials.getIsUserLoggedIn()){
-                navigateToLogin();
-            }
-        }
-
+//    logUserInfo();
 
     }
     @Override
@@ -61,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if(id == R.id.action_logout){
+            UserCredentials userCredentials = realm.where(UserCredentials.class).findFirst();
             realm.beginTransaction();
             userCredentials.setIsUserLoggedIn(false);
             realm.commitTransaction();
@@ -76,5 +76,16 @@ public class MainActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+    private void logUserInfo(){
+        List<UserCredentials> userCredentials = realm.where(UserCredentials.class).findAll();
+        for (UserCredentials uc :userCredentials){
+            Log.d(TAG, "*********USER*******************");
+            Log.d(TAG,"user UUID: " + uc.getUserUUID());
+            Log.d(TAG,"is user logged in: " + uc.getIsUserLoggedIn());
+            Log.d(TAG,"user token: " + uc.getToken());
+            Log.d(TAG,"user email: " + uc.getUserEmail());
+            Log.d(TAG,"*******END OF THIS USER*********");
+        }
     }
 }
