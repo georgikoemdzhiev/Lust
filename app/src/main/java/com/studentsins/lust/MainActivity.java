@@ -7,17 +7,39 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import io.realm.Realm;
+import io.realm.RealmResults;
 
+public class MainActivity extends AppCompatActivity {
+    private Realm realm;
+    private UserCredentials userCredentials;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        realm = Realm.getDefaultInstance();
+        RealmResults<UserCredentials> userCredentialses = realm.where(UserCredentials.class).findAll();
 
-        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-        startActivity(intent);
+        if (userCredentialses.size() == 0){
+            navigateToLogin();
+        }
+
+        if(userCredentialses.size() > 0) {
+            userCredentials = userCredentialses.get(0);
+            //if the user is not logged in already...
+            if(!userCredentials.getIsUserLoggedIn()){
+                navigateToLogin();
+            }
+        }
+
+
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 
     @Override
@@ -38,7 +60,21 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if(id == R.id.action_logout){
+            realm.beginTransaction();
+            userCredentials.setIsUserLoggedIn(false);
+            realm.commitTransaction();
+            navigateToLogin();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void navigateToLogin() {
+        Intent intent = new Intent(this,LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
