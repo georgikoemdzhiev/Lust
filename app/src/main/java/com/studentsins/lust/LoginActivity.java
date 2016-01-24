@@ -64,7 +64,8 @@ public class LoginActivity extends AppCompatActivity implements Callback {
         //get the shared preferences to retrieve the udid
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-
+        //hide toolbar
+        getSupportActionBar().hide();
         //get the default database
         realm = Realm.getDefaultInstance();
         //generate a random uuid if this is the first time the user opens the app...
