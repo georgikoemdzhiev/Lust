@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
                     android:imeActionId="@+id/login"
-                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeActionLabel="@string/action_log_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
@@ -70,15 +70,18 @@
 
         </LinearLayout>
     </ScrollView>
-    <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
+
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/invisibleText"
-        android:visibility="invisible"/>
+        android:src="@drawable/logo"
+        android:layout_above="@+id/invisibleText"/>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -88,15 +91,18 @@
         android:visibility="invisible"
         android:id="@+id/invisibleText"
         android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/login_form"/>
 
-    <ImageView
+    <!-- Login progress -->
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:scaleType="centerInside"
-        android:layout_above="@+id/login_form"
+        android:layout_below="@id/login_progress"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/logo"
-        android:layout_marginBottom="5dp"/>
+        android:layout_alignTop="@id/login_progress"
+        android:layout_alignBottom="@id/invisibleText"
+        android:visibility="gone"/>
 </RelativeLayout>

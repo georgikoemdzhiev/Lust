@@ -1,20 +1,19 @@
 package com.studentsins.lust;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.List;
-
-import io.realm.Realm;
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-    private Realm realm;
+    private SharedPreferences sharedPreferences;
+    private  SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,23 +21,21 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        realm = Realm.getDefaultInstance();
-//        Log.d(TAG,"LAST USER LOGGED INL " + lastUserLoggedin);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        editor = sharedPreferences.edit();
 
-       UserCredentials mCurrentUser = realm.where(UserCredentials.class).findFirst();
-        if(mCurrentUser == null){
-            navigateToLogin();
-        }else if (!mCurrentUser.getIsUserLoggedIn()){
+       Boolean isUserLoggedIn = sharedPreferences.getBoolean(Constants.USER_IF_LOG_IN,false);
+        if(!isUserLoggedIn){
             navigateToLogin();
         }
 
-//    logUserInfo();
+//        logUserInfo();
 
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
+
     }
 
     @Override
@@ -60,10 +57,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if(id == R.id.action_logout){
-            UserCredentials userCredentials = realm.where(UserCredentials.class).findFirst();
-            realm.beginTransaction();
-            userCredentials.setIsUserLoggedIn(false);
-            realm.commitTransaction();
+            editor.putBoolean(Constants.USER_IF_LOG_IN,false);
+            editor.apply();
             navigateToLogin();
             return true;
         }
@@ -78,14 +73,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     private void logUserInfo(){
-        List<UserCredentials> userCredentials = realm.where(UserCredentials.class).findAll();
-        for (UserCredentials uc :userCredentials){
-            Log.d(TAG, "*********USER*******************");
-            Log.d(TAG,"user UUID: " + uc.getUserUUID());
-            Log.d(TAG,"is user logged in: " + uc.getIsUserLoggedIn());
-            Log.d(TAG,"user token: " + uc.getToken());
-            Log.d(TAG,"user email: " + uc.getUserEmail());
-            Log.d(TAG,"*******END OF THIS USER*********");
-        }
+        String userEmail = sharedPreferences.getString(Constants.USER_EMAIL, "");
+        String userUDID = sharedPreferences.getString(Constants.USER_UDID,"");
+        Boolean userIfLoggedIn = sharedPreferences.getBoolean(Constants.USER_IF_LOG_IN, false);
+        String userToken = sharedPreferences.getString(Constants.USER_TOKEN,"");
+        Log.d(TAG,"*********USER*******************");
+        Log.d(TAG,"user UUID: " + userUDID);
+        Log.d(TAG,"is user logged in: " + userIfLoggedIn);
+        Log.d(TAG,"user token: " +userToken);
+        Log.d(TAG,"user email: " + userEmail);
+        Log.d(TAG,"*******END OF THIS USER*********");
     }
 }

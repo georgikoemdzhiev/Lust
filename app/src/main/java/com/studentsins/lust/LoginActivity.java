@@ -14,21 +14,20 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
-import io.realm.Realm;
-import io.realm.RealmResults;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -41,8 +40,6 @@ import okhttp3.Response;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements Callback {
-    private Realm realm;
-    RealmResults<UserCredentials> mUserCredentialses;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private Boolean isPostRequestSuccessful = false;
     Boolean isSuccessfulLogin = false;
@@ -56,37 +53,38 @@ public class LoginActivity extends AppCompatActivity implements Callback {
     private View mProgressView;
     private View mLoginFormView;
     private String message;
+    private SharedPreferences sharedPreferences;
+    private  SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //get the shared preferences to retrieve the udid
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        editor = sharedPreferences.edit();
+        logUserInfo();
         //hide toolbar
         getSupportActionBar().hide();
         //get the default database
-        realm = Realm.getDefaultInstance();
         //generate a random uuid if this is the first time the user opens the app...
-        if(sharedPreferences.getString(Constants.USERS_UDID, "").equals("")) {
+        if(sharedPreferences.getString(Constants.USER_UDID, "").equals("")) {
             udid = UUID.randomUUID().toString();
-            editor.putString(Constants.USERS_UDID, udid);
+            editor.putString(Constants.USER_UDID, udid);
             editor.apply();
         }else{
             //if this is not the first time... i.e. we have a UDID stored -> retrive it...
-            udid = sharedPreferences.getString(Constants.USERS_UDID, "");
+            udid = sharedPreferences.getString(Constants.USER_UDID, "");
         }
 
-        //finds all the users
-        mUserCredentialses = realm.where(UserCredentials.class).findAll();
+
         // Set up the login form.
         mEmailView = (EditText) findViewById(R.id.email);
 
         mPasswordView = (EditText) findViewById(R.id.password);
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        Button mLogInButton = (Button) findViewById(R.id.email_sign_in_button);
+        mLogInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
@@ -95,12 +93,22 @@ public class LoginActivity extends AppCompatActivity implements Callback {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        this.mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
+                if(actionId == 0){
+                    attemptLogin();
+                    return true;
+                }
+
+                return false;
+            }
+        });
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     /**
@@ -242,7 +250,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
         });
         Log.d(TAG,"OnResponse "+response.toString());
             isPostRequestSuccessful = response.isSuccessful();
-            Log.d(TAG, "WAS THIS LOGIN SUCCESSFUL: " + isPostRequestSuccessful);
+            Log.d(TAG, "WAS THIS LOGIN REQUEST SUCCESSFUL: " + isPostRequestSuccessful);
 
         if(isPostRequestSuccessful) {
             try {
@@ -263,24 +271,13 @@ public class LoginActivity extends AppCompatActivity implements Callback {
                             }
                             Log.d(TAG, "Response token: " + token);
 
-                            Log.d(TAG, "users size is: " + mUserCredentialses.size());
-                            //create a new record in the db and store the udid...
-                            UserCredentials newEntry = new UserCredentials();
-                            newEntry.setUserEmail(userEmailVerified);
-                            newEntry.setIsUserLoggedIn(true);
-                            newEntry.setToken(token);
-                            newEntry.setUserUUID(udid);
-                            realm.beginTransaction();
-                            //clear previous users...
-                            mUserCredentialses.clear();
-                            realm.copyToRealmOrUpdate(newEntry);
-                            realm.commitTransaction();
+                            editor.putString(Constants.USER_EMAIL, userEmailVerified);
+                            editor.putBoolean(Constants.USER_IF_LOG_IN, true);
+                            editor.putString(Constants.USER_TOKEN, token);
+                            editor.putString(Constants.USER_UDID, udid);
+                            editor.apply();
 
-                            Log.d(TAG,"users size is: " + mUserCredentialses.size());
-
-
-
-                            Toast.makeText(LoginActivity.this, "Login Successful! toEdit size: " + mUserCredentialses.size() + message, Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Login Successful!" + message, Toast.LENGTH_LONG).show();
                             logUserInfo();
                             navigateToApp();
                         } else {
@@ -359,15 +356,16 @@ public class LoginActivity extends AppCompatActivity implements Callback {
     }
 
     private void logUserInfo(){
-        List<UserCredentials> userCredentials = realm.where(UserCredentials.class).findAll();
-        for (UserCredentials uc :userCredentials){
+        String userEmail = sharedPreferences.getString(Constants.USER_EMAIL,"");
+        String userUDID = sharedPreferences.getString(Constants.USER_UDID,"");
+        Boolean userIfLoggedIn = sharedPreferences.getBoolean(Constants.USER_IF_LOG_IN, false);
+        String userToken = sharedPreferences.getString(Constants.USER_TOKEN,"");
             Log.d(TAG,"*********USER*******************");
-            Log.d(TAG,"user UUID: " + uc.getUserUUID());
-            Log.d(TAG,"is user logged in: " + uc.getIsUserLoggedIn());
-            Log.d(TAG,"user token: " + uc.getToken());
-            Log.d(TAG,"user email: " + uc.getUserEmail());
+            Log.d(TAG,"user UUID: " + userUDID);
+            Log.d(TAG,"is user logged in: " + userIfLoggedIn);
+            Log.d(TAG,"user token: " +userToken);
+            Log.d(TAG,"user email: " + userEmail);
             Log.d(TAG,"*******END OF THIS USER*********");
-        }
     }
 }
 
