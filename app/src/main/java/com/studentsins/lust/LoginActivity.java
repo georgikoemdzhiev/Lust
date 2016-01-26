@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -52,6 +53,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private TextView mRegister;
     private String message;
     private SharedPreferences sharedPreferences;
     private  SharedPreferences.Editor editor;
@@ -77,6 +79,16 @@ public class LoginActivity extends AppCompatActivity implements Callback {
             udid = sharedPreferences.getString(Constants.USER_UDID, "");
         }
 
+        mRegister = (TextView)findViewById(R.id.register);
+        mRegister.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "https://my.studentsins.com/register";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
 
         // Set up the login form.
         mEmailView = (EditText) findViewById(R.id.email);

@@ -18,4 +18,5 @@
     <string name="error_dialog_message_connection_to_server">There was an error connecting to the server.Please, try again later.</string>
     <string name="error_dialog_positive_button_connection_to_server">OK</string>
     <string name="error_dialog_title_incorrect_credentials">Login Unsuccessful!</string>
+    <string name="login_link_register_text"><u>Don\'t have an account?</u></string>
 </resources>
