@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -67,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
         editor = sharedPreferences.edit();
         logUserInfo();
         //hide toolbar
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         //get the default database
         //generate a random uuid if this is the first time the user opens the app...
         if(sharedPreferences.getString(Constants.USER_UDID, "").equals("")) {
@@ -83,10 +82,10 @@ public class LoginActivity extends AppCompatActivity implements Callback {
         mRegister.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://my.studentsins.com/register";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 
@@ -134,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
+        String email = mEmailView.getText().toString().trim();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -171,7 +170,8 @@ public class LoginActivity extends AppCompatActivity implements Callback {
             // form field with an error.
             focusView.requestFocus();
         } else {
-            userEmailVerified = mEmailView.getText().toString();
+            userEmailVerified = email;
+            Log.d(TAG,"|"+email);
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             if(isNetworkAvailable()) {
@@ -179,8 +179,8 @@ public class LoginActivity extends AppCompatActivity implements Callback {
                 final JSONObject myJson = new JSONObject();
                 try {
                     myJson.put("udid", udid);
-                    myJson.put("email", mEmailView.getText().toString());
-                    myJson.put("password", mPasswordView.getText().toString());
+                    myJson.put("email", userEmailVerified);
+                    myJson.put("password", password);
 
                     post("https://api.studentsins.com/v1/auth", myJson.toString());
 
