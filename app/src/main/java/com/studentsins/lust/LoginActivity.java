@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
     private String message;
     private SharedPreferences sharedPreferences;
     private  SharedPreferences.Editor editor;
+//    private TextView mForgottenPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,17 @@ public class LoginActivity extends AppCompatActivity implements Callback {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.click).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "https://my.studentsins.com/reset";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+
             }
         });
 
@@ -209,35 +222,44 @@ public class LoginActivity extends AppCompatActivity implements Callback {
      * Shows the progress UI and hides the login form.
      */
     private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+        final LinearLayout regCont = (LinearLayout) findViewById(R.id.registerContainer);
+        final LinearLayout forgotPassCont = (LinearLayout) findViewById(R.id.forgottenPasContainer);
 
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
+        mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        mLoginFormView.animate().setDuration(shortAnimTime).alpha(
+                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            }
+        });
 
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
+        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+        mProgressView.animate().setDuration(shortAnimTime).alpha(
+                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
+
+        regCont.setVisibility(show ? View.GONE : View.VISIBLE);
+        regCont.animate().setDuration(shortAnimTime).alpha(
+                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                regCont.setVisibility(show ? View.GONE : View.VISIBLE);
+            }
+        });
+        forgotPassCont.setVisibility(show ? View.GONE : View.VISIBLE);
+        forgotPassCont.animate().setDuration(shortAnimTime).alpha(
+                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                forgotPassCont.setVisibility(show ? View.GONE : View.VISIBLE);
+            }
+        });
     }
 
     @Override
@@ -261,12 +283,12 @@ public class LoginActivity extends AppCompatActivity implements Callback {
             }
         });
         Log.d(TAG,"OnResponse "+response.toString());
-            isPostRequestSuccessful = response.isSuccessful();
-            Log.d(TAG, "WAS THIS LOGIN REQUEST SUCCESSFUL: " + isPostRequestSuccessful);
+        isPostRequestSuccessful = response.isSuccessful();
+        Log.d(TAG, "WAS THIS LOGIN REQUEST SUCCESSFUL: " + isPostRequestSuccessful);
 
         if(isPostRequestSuccessful) {
             try {
-                 final JSONObject responseJson = new JSONObject(response.body().string());
+                final JSONObject responseJson = new JSONObject(response.body().string());
                 isSuccessfulLogin = responseJson.getBoolean("success");
                 message = responseJson.getString("message");
                 Log.d(TAG, "Response message: " + message);
@@ -367,17 +389,24 @@ public class LoginActivity extends AppCompatActivity implements Callback {
         startActivity(intent);
     }
 
+    private void hideRegisterAndForgottenPasswordsFields() {
+        findViewById(R.id.forgottenPasContainer).setVisibility(View.GONE);
+        findViewById(R.id.registerContainer).setVisibility(View.GONE);
+//        findViewById(R.id.forgonenPas).setVisibility(View.GONE);
+//        findViewById(R.id.click).setVisibility(View.GONE);
+    }
+
     private void logUserInfo(){
         String userEmail = sharedPreferences.getString(Constants.USER_EMAIL,"");
         String userUDID = sharedPreferences.getString(Constants.USER_UDID,"");
         Boolean userIfLoggedIn = sharedPreferences.getBoolean(Constants.USER_IF_LOG_IN, false);
         String userToken = sharedPreferences.getString(Constants.USER_TOKEN,"");
-            Log.d(TAG,"*********USER*******************");
-            Log.d(TAG,"user UUID: " + userUDID);
-            Log.d(TAG,"is user logged in: " + userIfLoggedIn);
-            Log.d(TAG,"user token: " +userToken);
-            Log.d(TAG,"user email: " + userEmail);
-            Log.d(TAG,"*******END OF THIS USER*********");
+        Log.d(TAG,"*********USER*******************");
+        Log.d(TAG,"user UUID: " + userUDID);
+        Log.d(TAG,"is user logged in: " + userIfLoggedIn);
+        Log.d(TAG,"user token: " +userToken);
+        Log.d(TAG,"user email: " + userEmail);
+        Log.d(TAG,"*******END OF THIS USER*********");
     }
 }
 

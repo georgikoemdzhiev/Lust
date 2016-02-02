@@ -114,12 +114,13 @@
         android:visibility="gone"/>
 
     <LinearLayout
+        android:id="@+id/registerContainer"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_form"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp">
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -128,9 +129,7 @@
             android:textSize="12sp"
             android:textColor="@color/dirtyWhite"
             android:text="@string/login_link_register_text"
-            android:layout_gravity="right"
-            android:layout_below="@+id/login_form"
-            android:layout_centerHorizontal="true"/>
+            android:layout_gravity="end"/>
 
 
         <TextView
@@ -138,11 +137,40 @@
             android:layout_height="wrap_content"
             android:id="@+id/register"
             android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
             android:textSize="12sp"
             android:textColor="@color/colorAccent"
             android:text="@string/login_register"
-            android:layout_gravity="right"
-            android:layout_below="@+id/login_form"
-            android:layout_centerHorizontal="true"/>
+            android:layout_gravity="end"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/forgottenPasContainer"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/registerContainer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/forgonenPas"
+            android:textSize="12sp"
+            android:textColor="@color/dirtyWhite"
+            android:text="@string/login_Forgoten_pas_text"
+            android:layout_gravity="end"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/click"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
+            android:textSize="12sp"
+            android:textColor="@color/colorAccent"
+            android:text="@string/login_forgoten_click_text"
+            android:layout_gravity="right"/>
     </LinearLayout>
 </RelativeLayout>
