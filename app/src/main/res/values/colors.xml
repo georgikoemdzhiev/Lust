@@ -5,4 +5,5 @@
     <color name="colorAccent">#eb6416</color>
     <color name="loginBGColor">#252525</color>
     <color name="dirtyWhite">#CCCCCC</color>
+    <color name="loginButtonColor">#F7401E</color>
 </resources>

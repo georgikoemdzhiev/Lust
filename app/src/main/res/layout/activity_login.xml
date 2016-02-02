@@ -24,39 +24,44 @@
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/dirtyWhite">
+            android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/dirtyWhite">
 
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/dirtyWhite"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:textSize="15sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/dirtyWhite">
 
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/dirtyWhite"
                     android:hint="@string/prompt_password"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_log_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:textSize="15sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -68,16 +73,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold"
-                android:background="@color/colorAccent"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/register"
-                android:textSize="12sp"
-                android:layout_marginTop="3dp"
-                android:text="@string/login_link_register_text"
-                android:layout_gravity="right"/>
+                android:background="@color/loginButtonColor"/>
 
         </LinearLayout>
     </ScrollView>
@@ -116,4 +112,37 @@
         android:layout_alignTop="@id/login_progress"
         android:layout_alignBottom="@id/invisibleText"
         android:visibility="gone"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_form"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/donthaveanaccount"
+            android:textSize="12sp"
+            android:textColor="@color/dirtyWhite"
+            android:text="@string/login_link_register_text"
+            android:layout_gravity="right"
+            android:layout_below="@+id/login_form"
+            android:layout_centerHorizontal="true"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/register"
+            android:layout_marginLeft="3dp"
+            android:textSize="12sp"
+            android:textColor="@color/colorAccent"
+            android:text="@string/login_register"
+            android:layout_gravity="right"
+            android:layout_below="@+id/login_form"
+            android:layout_centerHorizontal="true"/>
+    </LinearLayout>
 </RelativeLayout>
