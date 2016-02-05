@@ -39,7 +39,8 @@
                     android:inputType="textAutoComplete"
                     android:maxLines="1"
                     android:textColor="@color/dirtyWhite"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:textSize="15sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -56,7 +57,8 @@
                     android:inputType="textAutoComplete"
                     android:maxLines="1"
                     android:textColor="@color/dirtyWhite"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:textSize="15sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -73,7 +75,8 @@
                     android:inputType="textAutoComplete"
                     android:maxLines="1"
                     android:textColor="@color/dirtyWhite"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:textSize="15sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -90,7 +93,8 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:textColor="@color/dirtyWhite"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:textSize="15sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -110,7 +114,8 @@
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:textColor="@color/dirtyWhite"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:textSize="15sp"/>
 
             </android.support.design.widget.TextInputLayout>
 
