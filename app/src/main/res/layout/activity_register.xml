@@ -24,12 +24,12 @@
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/dirtyWhite">
+            android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/dirtyWhite">
 
                 <EditText
                     android:id="@+id/first_name"
@@ -38,13 +38,15 @@
                     android:hint="@string/prompt_first_name"
                     android:inputType="textAutoComplete"
                     android:maxLines="1"
+                    android:textColor="@color/dirtyWhite"
                     android:singleLine="true"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/dirtyWhite">
 
                 <EditText
                     android:id="@+id/second_name"
@@ -53,13 +55,15 @@
                     android:hint="@string/prompt_second_name"
                     android:inputType="textAutoComplete"
                     android:maxLines="1"
+                    android:textColor="@color/dirtyWhite"
                     android:singleLine="true"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/dirtyWhite">
 
                 <EditText
                     android:id="@+id/user_name"
@@ -68,13 +72,15 @@
                     android:hint="@string/prompt_user_name"
                     android:inputType="textAutoComplete"
                     android:maxLines="1"
+                    android:textColor="@color/dirtyWhite"
                     android:singleLine="true"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/dirtyWhite">
 
                 <EditText
                     android:id="@+id/email"
@@ -83,13 +89,15 @@
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
+                    android:textColor="@color/dirtyWhite"
                     android:singleLine="true"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/dirtyWhite">
 
                 <EditText
                     android:id="@+id/password"
@@ -101,6 +109,7 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
+                    android:textColor="@color/dirtyWhite"
                     android:singleLine="true"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -113,16 +122,37 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/action_register"
                 android:textStyle="bold"
-                android:background="@color/colorAccent"/>
+                android:background="@color/loginButtonColor"/>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/registerContainer"
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/login_link"
-                android:textSize="12sp"
-                android:layout_marginTop="3dp"
-                android:text="@string/register_link_login_text"
-                android:layout_gravity="right"/>
+                android:layout_marginTop="2dp"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/alreadyHaveAnAccount"
+                    android:textSize="12sp"
+                    android:textColor="@color/dirtyWhite"
+                    android:text="@string/register_link_login_text"
+                    android:layout_gravity="end"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/login_link"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginStart="3dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/register_login"
+                    android:layout_gravity="end"/>
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

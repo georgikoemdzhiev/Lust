@@ -30,4 +30,5 @@
     <string name="login_register">Sign up</string>
     <string name="login_forgoten_click_text">Click</string>
     <string name="login_Forgoten_pas_text">Forgot your password?</string>
+    <string name="register_login">Click</string>
 </resources>
