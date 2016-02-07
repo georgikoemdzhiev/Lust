@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //disable the title - design requirement.
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         editor = sharedPreferences.edit();
