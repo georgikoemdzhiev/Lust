@@ -2,10 +2,12 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:id="@+id/coordinatorLayout"
     tools:context="com.studentsins.lust.MainActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -38,12 +40,39 @@
 
     <include layout="@layout/content_main"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/left_labels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_white_18dp"/>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        fab:fab_addButtonColorNormal="@color/blood_orange"
+        fab:fab_addButtonColorPressed="@color/dirtyWhite"
+        fab:fab_addButtonPlusIconColor="@color/dirtyWhite"
+        fab:fab_addButtonSize = "normal"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        fab:fab_labelsPosition="left"
+        app:layout_anchor="@id/viewpager"
+        app:layout_anchorGravity="bottom|end">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/blood_orange"
+            fab:fab_title="Create a plan"
+            fab:fab_size="normal"
+            app:fab_icon="@drawable/ic_event_white_18dp"
+            fab:fab_colorPressed="@color/blood_orange"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/blood_orange"
+            fab:fab_size="normal"
+            app:fab_icon="@drawable/ic_sms_white_24dp"
+            fab:fab_title="Change status"
+            fab:fab_colorPressed="@color/dirtyWhite"/>
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </android.support.design.widget.CoordinatorLayout>
