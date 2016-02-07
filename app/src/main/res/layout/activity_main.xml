@@ -41,7 +41,7 @@
     <include layout="@layout/content_main"/>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/left_labels"
+        android:id="@+id/floatingActionMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -56,20 +56,22 @@
         app:layout_anchorGravity="bottom|end">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/createPlanBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/blood_orange"
             fab:fab_title="Create a plan"
             fab:fab_size="normal"
-            app:fab_icon="@drawable/ic_event_white_18dp"
-            fab:fab_colorPressed="@color/blood_orange"/>
+            app:fab_icon="@drawable/ic_event_white_48dp"
+            fab:fab_colorPressed="@color/dirtyWhite"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/changeStatusBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/blood_orange"
             fab:fab_size="normal"
-            app:fab_icon="@drawable/ic_sms_white_24dp"
+            app:fab_icon="@drawable/ic_textsms_white_48dp"
             fab:fab_title="Change status"
             fab:fab_colorPressed="@color/dirtyWhite"/>
 

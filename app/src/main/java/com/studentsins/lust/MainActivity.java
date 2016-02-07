@@ -11,13 +11,19 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.studentsins.lust.Adapters.LustFragmentPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private SharedPreferences sharedPreferences;
     private  SharedPreferences.Editor editor;
+    private FloatingActionButton mChangeStatus, mCreatePlan;
+    private FloatingActionsMenu mFloatingActionsMenu;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +41,31 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new LustFragmentPagerAdapter(getSupportFragmentManager(), this));
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setupWithViewPager(viewPager);
+
+        mFloatingActionsMenu = (FloatingActionsMenu)findViewById(R.id.floatingActionMenu);
+
+        mChangeStatus = (FloatingActionButton)findViewById(R.id.changeStatusBtn);
+        mChangeStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG,"Change Status pressed! | " + viewPager.getCurrentItem());
+                mFloatingActionsMenu.collapse();
+            }
+        });
+        mCreatePlan = (FloatingActionButton)findViewById(R.id.createPlanBtn);
+        mCreatePlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG,"Create plan pressed! | " + viewPager.getCurrentItem());
+                mFloatingActionsMenu.collapse();
+            }
+        });
 
 
     }
