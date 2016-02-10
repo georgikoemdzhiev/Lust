@@ -43,12 +43,12 @@
             </RelativeLayout>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/plan_toolbar"
+                android:id="@+id/user_toolbar"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/CardViewToolbarTheme"/>
+                android:theme="@style/myToolbarTheme"/>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
