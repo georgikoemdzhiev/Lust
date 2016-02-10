@@ -389,13 +389,6 @@ public class LoginActivity extends AppCompatActivity implements Callback {
         startActivity(intent);
     }
 
-    private void hideRegisterAndForgottenPasswordsFields() {
-        findViewById(R.id.forgottenPasContainer).setVisibility(View.GONE);
-        findViewById(R.id.registerContainer).setVisibility(View.GONE);
-//        findViewById(R.id.forgonenPas).setVisibility(View.GONE);
-//        findViewById(R.id.click).setVisibility(View.GONE);
-    }
-
     private void logUserInfo(){
         String userEmail = sharedPreferences.getString(Constants.USER_EMAIL,"");
         String userUDID = sharedPreferences.getString(Constants.USER_UDID,"");
