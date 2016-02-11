@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.studentsins.lust.Adapters.FeedCardAdapter;
+import com.studentsins.lust.MainActivity;
 import com.studentsins.lust.R;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
  */
 public class FeedFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
+    private static final String TAG = FeedFragment.class.getSimpleName();
     private int mPage;
     private RecyclerView mRefreshLayout;
     private Context mActivity;
@@ -49,6 +51,29 @@ public class FeedFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRefreshLayout.setLayoutManager(linearLayoutManager);
 
+        mRefreshLayout.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (dy > 0) {
+                    // Scrolling up
+                    MainActivity.mFloatingActionsMenu.animate()
+                            .setDuration(200)
+                            .translationY(300);
+                } else {
+                    // Scrolling down
+                    MainActivity.mFloatingActionsMenu.animate()
+                            .setDuration(200)
+                            .translationY(0);
+                }
+
+
+
+                Log.d(TAG,"Scrolling...");
+
+            }
+        });
         ArrayList<String> users = new ArrayList<>();
         users.add("Georgi Koemdzhiev");
         users.add("Mariya Menova");

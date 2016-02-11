@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private  SharedPreferences.Editor editor;
     private FloatingActionButton mChangeStatus, mCreatePlan;
-    private FloatingActionsMenu mFloatingActionsMenu;
+    public static FloatingActionsMenu mFloatingActionsMenu;
 
 
     @Override
