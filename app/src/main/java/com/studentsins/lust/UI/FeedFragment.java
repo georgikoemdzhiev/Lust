@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.studentsins.lust.Adapters.FeedCardAdapter;
-import com.studentsins.lust.MainActivity;
 import com.studentsins.lust.R;
+import com.studentsins.lust.Utils.ListenerCollection;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class FeedFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
     private static final String TAG = FeedFragment.class.getSimpleName();
     private int mPage;
-    private RecyclerView mRefreshLayout;
+    private RecyclerView mRecyclerView;
     private Context mActivity;
 
     public static FeedFragment newInstance(int page) {
@@ -46,32 +46,12 @@ public class FeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feed_layout,container,false);
 
-        mRefreshLayout = (RecyclerView) view.findViewById(R.id.feedCardViewList);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.feedCardViewList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRefreshLayout.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.addOnScrollListener(ListenerCollection.showHideFAB);
 
-        mRefreshLayout.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                if (dy >= 0) {
-                    // Scrolling up.. hide the FAB
-                    MainActivity.mFloatingActionsMenu.animate()
-                            .setDuration(150)
-                            .translationY(300);
-                } else {
-                    // Scrolling down.. show the FAB
-                    MainActivity.mFloatingActionsMenu.animate()
-                            .setDuration(150)
-                            .translationY(0);
-                }
-
-                Log.d(TAG,"DY value: "+dy);
-
-            }
-        });
         ArrayList<String> users = new ArrayList<>();
         users.add("Georgi Koemdzhiev");
         users.add("Mariya Menova");
@@ -85,7 +65,7 @@ public class FeedFragment extends Fragment {
 
         FeedCardAdapter adapter = new FeedCardAdapter(users,mActivity);
 
-        mRefreshLayout.setAdapter(adapter);
+        mRecyclerView.setAdapter(adapter);
         Log.d("MainActivity", "onCreateView" + mPage);
         return view;
     }

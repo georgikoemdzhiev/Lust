@@ -1,4 +1,4 @@
-package com.studentsins.lust;
+package com.studentsins.lust.UI;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -22,6 +22,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.studentsins.lust.R;
+import com.studentsins.lust.Utils.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;

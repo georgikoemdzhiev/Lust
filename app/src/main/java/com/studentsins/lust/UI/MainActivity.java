@@ -1,4 +1,4 @@
-package com.studentsins.lust;
+package com.studentsins.lust.UI;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +17,8 @@ import android.view.View;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.studentsins.lust.Adapters.LustFragmentPagerAdapter;
+import com.studentsins.lust.R;
+import com.studentsins.lust.Utils.Constants;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -72,32 +74,23 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                //Make sure that the fab is visible when scrolling the pages...
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+            @Override
+            public void onPageSelected(int position) {}
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+
+
                 MainActivity.mFloatingActionsMenu.animate()
                         .setDuration(150)
                         .translationY(0);
                 //show the toolbar
                 expandToolbar();
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+                Log.d(TAG,"onPageScrollStateChanded");
             }
         });
 
-
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
 
     }
 

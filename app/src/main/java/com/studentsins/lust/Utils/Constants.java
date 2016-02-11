@@ -1,4 +1,4 @@
-package com.studentsins.lust;
+package com.studentsins.lust.Utils;
 
 /**
  * Created by koemdzhiev on 22/01/16.
