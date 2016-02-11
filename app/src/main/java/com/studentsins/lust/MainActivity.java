@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new LustFragmentPagerAdapter(getSupportFragmentManager(), this));
         // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -66,6 +67,29 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d(TAG,"Create plan pressed! | " + viewPager.getCurrentItem());
                 mFloatingActionsMenu.collapse();
+            }
+        });
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //Make sure that the fab is visible when scrolling the pages...
+                MainActivity.mFloatingActionsMenu.animate()
+                        .setDuration(150)
+                        .translationY(0);
+                //show the toolbar
+                expandToolbar();
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
 
@@ -112,6 +136,13 @@ public class MainActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
+    public void expandToolbar(){
+        //setExpanded(boolean expanded, boolean animate)
+        AppBarLayout appBarLayout = (AppBarLayout)findViewById(R.id.appBarLayouy);
+        appBarLayout.setExpanded(true, true);
+    }
+
     private void logUserInfo(){
         String userEmail = sharedPreferences.getString(Constants.USER_EMAIL, "");
         String userUDID = sharedPreferences.getString(Constants.USER_UDID,"");

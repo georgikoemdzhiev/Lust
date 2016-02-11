@@ -56,17 +56,19 @@ public class FeedFragment extends Fragment {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                if (dy > 0) {
-                    // Scrolling up
+                if (dy >= 0) {
+                    // Scrolling up.. hide the FAB
                     MainActivity.mFloatingActionsMenu.animate()
-                            .setDuration(200)
+                            .setDuration(150)
                             .translationY(300);
                 } else {
-                    // Scrolling down
+                    // Scrolling down.. show the FAB
                     MainActivity.mFloatingActionsMenu.animate()
-                            .setDuration(200)
+                            .setDuration(150)
                             .translationY(0);
                 }
+
+                Log.d(TAG,"DY value: "+dy);
 
             }
         });
@@ -77,6 +79,9 @@ public class FeedFragment extends Fragment {
         users.add("Ivan Dqkov");
         users.add("Dymityr Vasilev");
         users.add("Petar Dimov");
+        users.add("Stoyan Stoyanov");
+        users.add("Alexander Lunar");
+        users.add("Awesome Jhon");
 
         FeedCardAdapter adapter = new FeedCardAdapter(users,mActivity);
 
