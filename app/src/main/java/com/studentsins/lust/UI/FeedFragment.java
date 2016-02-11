@@ -68,10 +68,6 @@ public class FeedFragment extends Fragment {
                             .translationY(0);
                 }
 
-
-
-                Log.d(TAG,"Scrolling...");
-
             }
         });
         ArrayList<String> users = new ArrayList<>();
