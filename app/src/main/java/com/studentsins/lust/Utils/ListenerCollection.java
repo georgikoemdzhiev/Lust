@@ -20,12 +20,11 @@ public class ListenerCollection {
                 // Scrolling up
                 Log.d(TAG, "Scrolling UP - RecyclerLayout");
                 hideFAB();
-                isFabShown = false;
             } else if(dy < 0 && !isFabShown){
                 // Scrolling down
                 Log.d(TAG, "Scrolling DOWN - RecyclerLayout");
                 showFAB();
-                isFabShown = true;
+
             }
         }
     };
@@ -34,11 +33,13 @@ public class ListenerCollection {
         MainActivity.mFloatingActionsMenu.animate()
                 .setDuration(150)
                 .translationY(300);
+        isFabShown = false;
     }
 
-    private static void showFAB() {
+    public static void showFAB() {
         MainActivity.mFloatingActionsMenu.animate()
                 .setDuration(200)
                 .translationY(0);
+        isFabShown = true;
     }
 }

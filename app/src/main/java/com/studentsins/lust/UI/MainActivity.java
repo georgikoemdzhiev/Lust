@@ -19,6 +19,7 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.studentsins.lust.Adapters.LustFragmentPagerAdapter;
 import com.studentsins.lust.R;
 import com.studentsins.lust.Utils.Constants;
+import com.studentsins.lust.Utils.ListenerCollection;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -81,10 +82,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
 
 
-
-                MainActivity.mFloatingActionsMenu.animate()
-                        .setDuration(150)
-                        .translationY(0);
+                ListenerCollection.showFAB();
                 //show the toolbar
                 expandToolbar();
                 Log.d(TAG,"onPageScrollStateChanded");
