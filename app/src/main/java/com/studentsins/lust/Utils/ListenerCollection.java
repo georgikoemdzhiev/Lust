@@ -1,5 +1,6 @@
 package com.studentsins.lust.Utils;
 
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
@@ -29,6 +30,22 @@ public class ListenerCollection {
         }
     };
 
+    public static ViewPager.OnPageChangeListener onPageChangeListenerShowFAB = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+        @Override
+        public void onPageSelected(int position) {}
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+
+            showFAB();
+            //show the toolbar
+            expandToolbar();
+            Log.d(TAG,"onPageScrollStateChanded");
+        }
+    };
+
     private static void hideFAB() {
         MainActivity.mFloatingActionsMenu.animate()
                 .setDuration(150)
@@ -41,5 +58,9 @@ public class ListenerCollection {
                 .setDuration(200)
                 .translationY(0);
         isFabShown = true;
+    }
+    public static void expandToolbar(){
+        //setExpanded(boolean expanded, boolean animate)
+        MainActivity.appBarLayout.setExpanded(true, true);
     }
 }

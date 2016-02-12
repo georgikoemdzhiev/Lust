@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private  SharedPreferences.Editor editor;
     private FloatingActionButton mChangeStatus, mCreatePlan;
     public static FloatingActionsMenu mFloatingActionsMenu;
+    public static AppBarLayout appBarLayout;
 
 
     @Override
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setupWithViewPager(viewPager);
 
+        appBarLayout = (AppBarLayout)findViewById(R.id.appBarLayouy);
+
         mFloatingActionsMenu = (FloatingActionsMenu)findViewById(R.id.floatingActionMenu);
 
         mChangeStatus = (FloatingActionButton)findViewById(R.id.changeStatusBtn);
@@ -73,21 +76,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
-            @Override
-            public void onPageSelected(int position) {}
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-
-                ListenerCollection.showFAB();
-                //show the toolbar
-                expandToolbar();
-                Log.d(TAG,"onPageScrollStateChanded");
-            }
-        });
+        viewPager.addOnPageChangeListener(ListenerCollection.onPageChangeListenerShowFAB);
 
 
     }
@@ -128,11 +117,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void expandToolbar(){
-        //setExpanded(boolean expanded, boolean animate)
-        AppBarLayout appBarLayout = (AppBarLayout)findViewById(R.id.appBarLayouy);
-        appBarLayout.setExpanded(true, true);
-    }
+
 
     private void logUserInfo(){
         String userEmail = sharedPreferences.getString(Constants.USER_EMAIL, "");
