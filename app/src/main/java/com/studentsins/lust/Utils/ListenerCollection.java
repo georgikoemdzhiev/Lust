@@ -41,7 +41,9 @@ public class ListenerCollection {
 
             showFAB();
             //show the toolbar
-            expandToolbar();
+
+            //expand the toolbar... NOW COMMENTED DUE TO A GOOGLE BUG
+//            expandToolbar();
             Log.d(TAG,"onPageScrollStateChanded");
         }
     };
