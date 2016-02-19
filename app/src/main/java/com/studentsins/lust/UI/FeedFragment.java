@@ -53,13 +53,13 @@ public class FeedFragment extends Fragment {
         mRecyclerView.addOnScrollListener(ListenerCollection.showHideFAB);
 
         ArrayList<String> users = new ArrayList<>();
+        users.add("Andrew Garden");
+        users.add("Ben Richnond");
+        users.add("Liviu Sima");
         users.add("Georgi Koemdzhiev");
-        users.add("Mariya Menova");
-        users.add("Simeon Simeonov");
-        users.add("Ivan Dqkov");
-        users.add("Dymityr Vasilev");
-        users.add("Petar Dimov");
-        users.add("Stoyan Stoyanov");
+        users.add("Daniel Tait");
+        users.add("Prevain Davelaar");
+        users.add("Andrius Kucinskas");
         users.add("Alexander Lunar");
         users.add("Awesome Jhon");
 

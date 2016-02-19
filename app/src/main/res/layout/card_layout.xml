@@ -77,17 +77,18 @@
                     <ImageView
                         android:scaleType="fitCenter"
                         android:adjustViewBounds="true"
-                        android:layout_width="20dp"
+                        android:layout_width="17dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/status_icon"
                         android:layout_weight="1"
-                        android:src="@drawable/cafecoffee"/>
+                        android:src="@drawable/ic_local_cafe_white_48dp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:text="Taking it easy"
-                            android:textSize="15sp"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="2dp"
                             android:textColor="@color/blood_orange"
                             android:id="@+id/plan_status"/>
                 </LinearLayout>
@@ -148,7 +149,7 @@
                     android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/like_icon"
-                    android:src="@drawable/checkmark"/>
+                    android:src="@drawable/ic_done_white_48dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

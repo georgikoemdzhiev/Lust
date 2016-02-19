@@ -31,4 +31,6 @@
     <string name="login_forgoten_click_text">Click</string>
     <string name="login_Forgoten_pas_text">Forgot your password?</string>
     <string name="register_login">Click</string>
+    <string name="action_search">Search</string>
+    <string name="action_notification">Notification</string>
 </resources>
