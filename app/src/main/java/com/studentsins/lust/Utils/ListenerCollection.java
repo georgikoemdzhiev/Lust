@@ -44,7 +44,7 @@ public class ListenerCollection {
 
             //expand the toolbar... NOW COMMENTED DUE TO A GOOGLE BUG
 //            expandToolbar();
-            Log.d(TAG,"onPageScrollStateChanded");
+//            Log.d(TAG,"onPageScrollStateChanded");
         }
     };
 

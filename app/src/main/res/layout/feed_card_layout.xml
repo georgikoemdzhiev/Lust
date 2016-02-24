@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    card_view:cardCornerRadius="4dp"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dp"
+        android:background="@color/card_top_background">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingBottom="4dp"
+            android:id="@+id/card_header_container"
+            android:background="@color/card_top_background">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/profile_picture_container">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/event_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/profilepic"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="#FFFFFF"/>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/event_toolbar"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/myToolbarTheme"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/top_plan_status_container"
+                android:layout_toRightOf="@id/profile_picture_container"
+                android:layout_marginLeft="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Georgi Koemdzhiev"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/white"
+                    android:id="@+id/vendor_name"/>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/location_container"
+                    android:weightSum="2"
+                    android:gravity="center"
+                    android:layout_below="@+id/vendor_name"
+                    android:layout_alignLeft="@+id/vendor_name"
+                    android:layout_alignStart="@+id/vendor_name">
+
+                    <ImageView
+                        android:scaleType="fitCenter"
+                        android:adjustViewBounds="true"
+                        android:layout_width="17dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/location_icon"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_local_cafe_white_48dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Taking it easy"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="2dp"
+                            android:textColor="@color/blood_orange"
+                            android:id="@+id/location"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="1:39am Monday 11th January 2016"
+                    android:id="@+id/post_time"
+                    android:textColor="@color/grey_light"
+                    android:layout_below="@+id/location_container"/>
+            </RelativeLayout>
+        </RelativeLayout>
+        <!-- Empty layout container to draw the orange line-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:orientation="horizontal"
+            android:layout_above="@+id/event_name_container"
+            android:background="@color/blood_orange">
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_header_container"
+            android:id="@+id/event_name_container"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:background="@color/card_top_background">
+
+            <TextView
+                android:padding="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:scrollbars="vertical"
+                android:textColor="@color/dirtyWhite"
+                android:text="Lorem ipsum dolor sit amet, consectetur."/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:id="@+id/card_content_container"
+            android:layout_below="@+id/event_name_container"
+            android:background="@color/card_top_background">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:scaleType="fitStart"
+                    android:adjustViewBounds="true"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/like_icon"
+                    android:src="@drawable/ic_done_white_48dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="4"
+                    android:textSize="20sp"
+                    android:id="@+id/numberOfLikes"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:paddingLeft="5dp"
+                    android:text="|"
+                    android:layout_centerInParent="true"
+                    android:textSize="20sp"
+                    android:id="@+id/dot"/>
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:id="@+id/numberOfComments"/>
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="Comments"
+                    android:textSize="20sp"
+                    android:id="@+id/comments"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    </android.support.v7.widget.CardView>

@@ -17,41 +17,41 @@ import java.util.ArrayList;
 /**
  * Created by koemdzhiev on 10/02/16.
  */
-public class FeedCardAdapter extends RecyclerView.Adapter<FeedCardAdapter.CardViewHolder> {
-    private ArrayList<String> users;
+public class EventsCardAdapter extends RecyclerView.Adapter<EventsCardAdapter.CardViewHolder> {
+    private ArrayList<String> eventName;
     public Context mContext;
 
-    public FeedCardAdapter(ArrayList<String> users, Context context) {
-        this.users = users;
+    public EventsCardAdapter(ArrayList<String> users, Context context) {
+        this.eventName = users;
         mContext = context;
     }
 
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.feed_card_layout,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.events_card_layout,parent,false);
 
         return new CardViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
-        String name = users.get(position);
-        holder.mUserName.setText(name);
+        String vendorName = eventName.get(position);
+        holder.mVendorName.setText(vendorName);
     }
 
     @Override
     public int getItemCount() {
-        return users.size();
+        return eventName.size();
     }
 
 
     public class CardViewHolder extends RecyclerView.ViewHolder {
-        protected TextView mUserName;
+        protected TextView mVendorName;
         protected Toolbar mToolbar;
 
         public CardViewHolder(View itemView) {
             super(itemView);
-            mUserName = (TextView)itemView.findViewById(R.id.vendor_name);
+            mVendorName = (TextView)itemView.findViewById(R.id.vendor_name);
             mToolbar = (Toolbar)itemView.findViewById(R.id.event_toolbar);
             mToolbar.inflateMenu(R.menu.menu_feed_user);
 
