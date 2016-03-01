@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(new LustFragmentPagerAdapter(getSupportFragmentManager(), this));
         // Give the TabLayout the ViewPager
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);

@@ -91,4 +91,10 @@ public class SnapshotFragment extends Fragment {
         Log.d("MainActivity", "onCreateView" + mPage);
         return view;
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("Snapshot fragment", "onDestroyView");
+    }
 }
