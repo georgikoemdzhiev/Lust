@@ -1,18 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/tab_bg">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Snapshot page"
-        android:id="@+id/snapshot_text"
-        android:textColor="@color/dirtyWhite"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+   <android.support.v4.widget.NestedScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cantDecideContainer"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:id="@+id/grey_circle_bg"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/perfect_grey_circle"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"/>
+
+            <ImageView
+                android:id="@+id/cant_devide_black_circle_bg"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/perfect_black_circle"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
+            
+            <com.studentsins.lust.UI.CircleProgressBar
+                android:id="@+id/cantDecideProgressBar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:progress="0"
+                app:progressBarThickness="3dp"
+                android:layout_alignTop="@+id/grey_circle_bg"
+                android:layout_alignLeft="@+id/grey_circle_bg"
+                android:layout_alignStart="@+id/grey_circle_bg"
+                android:layout_alignBottom="@+id/grey_circle_bg"
+                android:layout_alignRight="@+id/grey_circle_bg"
+                android:layout_alignEnd="@+id/grey_circle_bg"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+   </android.support.v4.widget.NestedScrollView>
 
 </RelativeLayout>
