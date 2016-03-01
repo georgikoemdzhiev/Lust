@@ -31,7 +31,11 @@ public class SnapshotFragment extends Fragment {
         @Override
         public void onAnimationEnd(Animator animator) {
             // Log.d(TAG, "onAnimationEnd");
-            mCantDecideProgressBar.setProgress(100);
+            if(mCantDecideProgressBar.getProgress() < 100){
+                mCantDecideProgressBar.setProgress(0);
+            }else {
+                mCantDecideProgressBar.setProgress(100);
+            }
             //mNumSins.setText(numberOfSins+"");
         }
         @Override
@@ -51,7 +55,7 @@ public class SnapshotFragment extends Fragment {
                 cantDecideProgressAnimator.start();
                 Log.d(TAG, "ACTION_DOWN executed");
             }
-            return false;
+            return true;
         }
     };
 
