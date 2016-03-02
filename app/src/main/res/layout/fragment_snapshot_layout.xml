@@ -40,6 +40,8 @@
                 android:scaleType="fitXY"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"/>
+
+
             
             <com.studentsins.lust.UI.CircleProgressBar
                 android:id="@+id/cantDecideProgressBar"
@@ -53,6 +55,41 @@
                 android:layout_alignBottom="@+id/grey_circle_bg"
                 android:layout_alignRight="@+id/grey_circle_bg"
                 android:layout_alignEnd="@+id/grey_circle_bg"/>
+
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cantDecideIcon"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/cant_decide"
+                android:layout_alignTop="@+id/cant_devide_black_circle_bg"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="28dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/cantDecideIcon"
+                android:layout_centerHorizontal="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textColor="@color/dirtyWhite"
+                    android:textStyle="bold"
+                    android:id="@+id/numberOfCantDecide"
+                    android:text="10"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/dirtyWhite"
+                    android:text="can't decide"/>
+            </LinearLayout>
+
 
         </RelativeLayout>
 
