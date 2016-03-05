@@ -13,6 +13,7 @@ import android.view.View;
 import com.studentsins.lust.R;
 
 /**
+ * This is a custom progress bar to allow fine tuning
  * Created by koemdzhiev on 01/03/16.
  */
 public class CircleProgressBar extends View {
