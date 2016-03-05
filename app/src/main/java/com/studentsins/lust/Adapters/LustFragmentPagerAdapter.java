@@ -9,6 +9,8 @@ import com.studentsins.lust.UI.FeedFragment;
 import com.studentsins.lust.UI.SnapshotFragment;
 
 /**
+ * Fragment pager adapter to handle the
+ * functionality of the viewpager
  * Created by koemdzhiev on 07/02/16.
  */
 public class LustFragmentPagerAdapter extends android.support.v4.app.FragmentPagerAdapter {
@@ -20,7 +22,7 @@ public class LustFragmentPagerAdapter extends android.support.v4.app.FragmentPag
         super(fm);
         mContext = context;
     }
-
+//Instantiate the fragments...
     @Override
     public Fragment getItem(int position) {
         switch (position){

@@ -23,6 +23,8 @@ import java.util.ArrayList;
 public class EventsFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private Context mActivity;
+    private int mPage;
+    public static final String ARG_PAGE = "ARG_PAGE";
 
     // Method that returns a new instance of the fragment - recommended way of creating a fragment
     public static EventsFragment newInstance(int page) {
@@ -36,7 +38,7 @@ public class EventsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //mPage = getArguments().getInt(ARG_PAGE);
+        mPage = getArguments().getInt(ARG_PAGE);
         mActivity = getActivity();
         Log.d("MainActivity", "onCreate");
     }

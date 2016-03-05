@@ -19,6 +19,7 @@ import com.studentsins.lust.R;
  */
 public class SnapshotFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
+    private int mPage;
     private static String TAG;
     private ImageView mCantDecideGg;
     private CircleProgressBar mCantDecideProgressBar;
@@ -70,7 +71,7 @@ public class SnapshotFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //mPage = getArguments().getInt(ARG_PAGE);
+        mPage = getArguments().getInt(ARG_PAGE);
         TAG = getActivity().getClass().getSimpleName();
     }
 
