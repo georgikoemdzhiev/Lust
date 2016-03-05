@@ -20,7 +20,10 @@ import com.studentsins.lust.Adapters.LustFragmentPagerAdapter;
 import com.studentsins.lust.R;
 import com.studentsins.lust.Utils.Constants;
 import com.studentsins.lust.Utils.ListenerCollection;
-
+/*
+ * This class will hold the main functionality associated with the tree fragments.
+ * It will host methods/date the fragments
+ */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private SharedPreferences sharedPreferences;
@@ -38,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         //disable the title - design requirement.
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         editor = sharedPreferences.edit();
 
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+//        set the amounts of stored fragments to 2 to avoid some of the fragments being destroyed.
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(new LustFragmentPagerAdapter(getSupportFragmentManager(), this));
         // Give the TabLayout the ViewPager
@@ -57,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         appBarLayout = (AppBarLayout)findViewById(R.id.appBarLayouy);
-
+//Set up the floating action menu...
         mFloatingActionsMenu = (FloatingActionsMenu)findViewById(R.id.floatingActionMenu);
-
+//Set up the status change floating action button...
         mChangeStatus = (FloatingActionButton)findViewById(R.id.changeStatusBtn);
         mChangeStatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 mFloatingActionsMenu.collapse();
             }
         });
+        //Set up the create plan floating action button...
         mCreatePlan = (FloatingActionButton)findViewById(R.id.createPlanBtn);
         mCreatePlan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,9 +80,8 @@ public class MainActivity extends AppCompatActivity {
                 mFloatingActionsMenu.collapse();
             }
         });
-
+//Set up the onPageChange listener - using a static listener in ListenerCollection class...
         viewPager.addOnPageChangeListener(ListenerCollection.onPageChangeListenerShowFAB);
-
 
     }
 
@@ -110,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+//Method to transfer the user to the log in page...
     private void navigateToLogin() {
         Intent intent = new Intent(this,LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -119,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+//Method intended for debugging purposes - it prints the details of the log in user...
     private void logUserInfo(){
         String userEmail = sharedPreferences.getString(Constants.USER_EMAIL, "");
         String userUDID = sharedPreferences.getString(Constants.USER_UDID,"");
