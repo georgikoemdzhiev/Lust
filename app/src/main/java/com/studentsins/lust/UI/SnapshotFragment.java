@@ -14,12 +14,12 @@ import android.widget.ImageView;
 import com.studentsins.lust.R;
 
 /**
+ * This class will hold the functionality for the Snapshot fragment
  * Created by koemdzhiev on 07/02/16.
  */
 public class SnapshotFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
     private static String TAG;
-    private int mPage;
     private ImageView mCantDecideGg;
     private CircleProgressBar mCantDecideProgressBar;
     private ObjectAnimator cantDecideProgressAnimator;
@@ -58,7 +58,7 @@ public class SnapshotFragment extends Fragment {
             return true;
         }
     };
-
+// Method that returns a new instance of the fragment - recommended way of creating a fragment
     public static SnapshotFragment newInstance(int page) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
@@ -70,9 +70,8 @@ public class SnapshotFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
+        //mPage = getArguments().getInt(ARG_PAGE);
         TAG = getActivity().getClass().getSimpleName();
-        Log.d("MainActivity", "onCreate" + mPage);
     }
 
     @Override
@@ -88,7 +87,7 @@ public class SnapshotFragment extends Fragment {
         cantDecideProgressAnimator.addListener(progressBarAnimationListener);
         //set the duration of the animation to 1.2 seconds
         cantDecideProgressAnimator.setDuration(1200);
-        Log.d("MainActivity", "onCreateView" + mPage);
+        Log.d("MainActivity", "onCreateView");
         return view;
     }
 
