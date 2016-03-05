@@ -208,7 +208,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
     //Method to validate an email...
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        Matcher matcher = RegisterActivity.EMAIL_PATTERN.matcher(email);
+        Matcher matcher = Constants.EMAIL_PATTERN.matcher(email);
         return matcher.matches();
         //return email.contains("@");
     }

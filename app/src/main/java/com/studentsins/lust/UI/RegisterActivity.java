@@ -17,17 +17,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.studentsins.lust.R;
+import com.studentsins.lust.Utils.Constants;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * This class holds the functionality for log in
  * A login screen that offers login via email/password.
  */
 public class RegisterActivity extends AppCompatActivity {
-    public static final Pattern EMAIL_PATTERN = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     // UI references.
     private EditText mFirstName, mSecondName, mUserName, mEmailView, mPasswordView;
     private TextView mLoginLink;
@@ -154,7 +152,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean isEmailValid(String email) {
-        Matcher emailMatcher = EMAIL_PATTERN.matcher(email);
+        Matcher emailMatcher = Constants.EMAIL_PATTERN.matcher(email);
         return emailMatcher.matches();
     }
 
