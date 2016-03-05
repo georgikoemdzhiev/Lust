@@ -70,9 +70,6 @@ public class LoginActivity extends AppCompatActivity implements Callback {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
         editor = sharedPreferences.edit();
         logUserInfo();
-        //hide toolbar
-//        getSupportActionBar().hide();
-        //get the default database
         //generate a random uuid if this is the first time the user opens the app...
         if(sharedPreferences.getString(Constants.USER_UDID, "").equals("")) {
             udid = UUID.randomUUID().toString();
@@ -82,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
             //if this is not the first time... i.e. we have a UDID stored -> retrive it...
             udid = sharedPreferences.getString(Constants.USER_UDID, "");
         }
-
+//Set up the register button...
         mRegister = (TextView)findViewById(R.id.register);
         mRegister.setOnClickListener(new OnClickListener() {
             @Override
@@ -93,8 +90,8 @@ public class LoginActivity extends AppCompatActivity implements Callback {
                 startActivity(intent);
             }
         });
-
-        findViewById(R.id.click).setOnClickListener(new OnClickListener() {
+// Set up the password reset link to the Lust site...
+        findViewById(R.id.forgotPasswordLink).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 String url = "https://my.studentsins.com/reset";
@@ -107,9 +104,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
 
         // Set up the login form.
         mEmailView = (EditText) findViewById(R.id.email);
-
         mPasswordView = (EditText) findViewById(R.id.password);
-
         Button mLogInButton = (Button) findViewById(R.id.email_sign_in_button);
         mLogInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -117,7 +112,6 @@ public class LoginActivity extends AppCompatActivity implements Callback {
                 attemptLogin();
             }
         });
-
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         this.mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -127,7 +121,6 @@ public class LoginActivity extends AppCompatActivity implements Callback {
                     attemptLogin();
                     return true;
                 }
-
                 return false;
             }
         });
@@ -139,7 +132,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
     }
 
     /**
-     * Attempts to sign in the account specified by the login form.
+     * Attempts to log in the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
@@ -210,12 +203,12 @@ public class LoginActivity extends AppCompatActivity implements Callback {
             }
         }
     }
-
+//Method to validate an email...
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         return email.contains("@");
     }
-
+//Method to validate a password...
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() >= 8;
@@ -276,7 +269,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
             }
         });
     }
-
+//Method to handle the response from the server...
     @Override
     public void onResponse(Call call, Response response) throws IOException {
         runOnUiThread(new Runnable() {
