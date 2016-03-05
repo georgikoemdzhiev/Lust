@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.studentsins.lust.R;
 
 /**
+ * This class holds the functionality for log in
  * A login screen that offers login via email/password.
  */
 public class RegisterActivity extends AppCompatActivity {
@@ -143,7 +144,8 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             // Show a progress spinner, and kick off a background task to
             showProgress(true);
-            // perform the user login attempt.
+            // perform the user register attempt. Will be completed when
+            // the register endpoint is avaiable fron the backend API.
             //TODO  send a HTTPS post request with the JSON data
         }
     }
