@@ -1,6 +1,7 @@
 package com.studentsins.lust.Utils;
 
 /**
+ * Class to hold any constants needed elsewhere in the app.
  * Created by koemdzhiev on 22/01/16.
  */
 public class Constants {
