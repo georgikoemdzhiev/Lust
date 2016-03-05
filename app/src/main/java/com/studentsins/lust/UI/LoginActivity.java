@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.UUID;
+import java.util.regex.Matcher;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -207,7 +208,9 @@ public class LoginActivity extends AppCompatActivity implements Callback {
     //Method to validate an email...
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        Matcher matcher = RegisterActivity.EMAIL_PATTERN.matcher(email);
+        return matcher.matches();
+        //return email.contains("@");
     }
 
     //Method to validate a password...

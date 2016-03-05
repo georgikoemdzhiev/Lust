@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
  * A login screen that offers login via email/password.
  */
 public class RegisterActivity extends AppCompatActivity {
-    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+    public static final Pattern EMAIL_PATTERN = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     // UI references.
     private EditText mFirstName, mSecondName, mUserName, mEmailView, mPasswordView;
