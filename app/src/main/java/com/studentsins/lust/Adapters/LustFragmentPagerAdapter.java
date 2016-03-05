@@ -37,12 +37,12 @@ public class LustFragmentPagerAdapter extends android.support.v4.app.FragmentPag
 
         return null;
     }
-
+//Return the number of pages...
     @Override
     public int getCount() {
         return PAGE_COUNT;
     }
-
+//Set up the page's titles...
     @Override
     public CharSequence getPageTitle(int position) {
         return tabTitles[position];
