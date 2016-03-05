@@ -94,12 +94,12 @@ public class CircleProgressBar extends View {
 
     }
 
+    public float getProgress() {
+        return this.progress;
+    }
+
     public void setProgress(float progress) {
         this.progress = progress;
         invalidate();// Notify the view to redraw it self (the onDraw method is called)
-    }
-
-    public float getProgress(){
-        return this.progress;
     }
 }

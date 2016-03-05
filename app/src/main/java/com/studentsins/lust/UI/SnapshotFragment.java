@@ -19,30 +19,35 @@ import com.studentsins.lust.R;
  */
 public class SnapshotFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
-    private int mPage;
     private static String TAG;
+    private int mPage;
     private ImageView mCantDecideGg;
     private CircleProgressBar mCantDecideProgressBar;
     private ObjectAnimator cantDecideProgressAnimator;
-    private Animator.AnimatorListener progressBarAnimationListener =  new  Animator.AnimatorListener() {
+    private Animator.AnimatorListener progressBarAnimationListener = new Animator.AnimatorListener() {
         @Override
         public void onAnimationStart(Animator animator) {
             mCantDecideProgressBar.setProgress(0);
         }
+
         @Override
         public void onAnimationEnd(Animator animator) {
             // Log.d(TAG, "onAnimationEnd");
-            if(mCantDecideProgressBar.getProgress() < 100){
+            if (mCantDecideProgressBar.getProgress() < 100) {
                 mCantDecideProgressBar.setProgress(0);
-            }else {
+            } else {
                 mCantDecideProgressBar.setProgress(100);
             }
             //mNumSins.setText(numberOfSins+"");
         }
+
         @Override
-        public void onAnimationCancel(Animator animator) {}
+        public void onAnimationCancel(Animator animator) {
+        }
+
         @Override
-        public void onAnimationRepeat(Animator animator) {}
+        public void onAnimationRepeat(Animator animator) {
+        }
     };
     private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
         @Override
@@ -59,7 +64,8 @@ public class SnapshotFragment extends Fragment {
             return true;
         }
     };
-// Method that returns a new instance of the fragment - recommended way of creating a fragment
+
+    // Method that returns a new instance of the fragment - recommended way of creating a fragment
     public static SnapshotFragment newInstance(int page) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
@@ -77,11 +83,11 @@ public class SnapshotFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_snapshot_layout,container,false);
-        mCantDecideGg = (ImageView)view.findViewById(R.id.cant_decide_black_circle_bg);
+        View view = inflater.inflate(R.layout.fragment_snapshot_layout, container, false);
+        mCantDecideGg = (ImageView) view.findViewById(R.id.cant_decide_black_circle_bg);
 
         mCantDecideGg.setOnTouchListener(onTouchListener);
-        mCantDecideProgressBar = (CircleProgressBar)view.findViewById(R.id.cantDecideProgressBar);
+        mCantDecideProgressBar = (CircleProgressBar) view.findViewById(R.id.cantDecideProgressBar);
         //set up the project animator to animate the progress bar from 0 to 100
         cantDecideProgressAnimator = ObjectAnimator.ofFloat(mCantDecideProgressBar, "progress", 0.0f, 100.0f);
         //add the animation listener to the progress animator to check when the progress has started,finished...

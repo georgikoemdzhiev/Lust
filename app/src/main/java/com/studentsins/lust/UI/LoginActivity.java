@@ -45,12 +45,12 @@ import okhttp3.Response;
  */
 public class LoginActivity extends AppCompatActivity implements Callback {
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    private Boolean isPostRequestSuccessful = false;
+    private static final String TAG = LoginActivity.class.getSimpleName();
     Boolean isSuccessfulLogin = false;
     String udid = "";
+    private Boolean isPostRequestSuccessful = false;
     //Stores the user email after it has been verified as an email - containing '@' symbol
     private String userEmailVerified;
-    private static final String TAG = LoginActivity.class.getSimpleName();
     // UI references.
     private EditText mEmailView;
     private EditText mPasswordView;
@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
     private TextView mRegister;
     private String message;
     private SharedPreferences sharedPreferences;
-    private  SharedPreferences.Editor editor;
+    private SharedPreferences.Editor editor;
 //    private TextView mForgottenPassword;
 
     @Override
@@ -71,20 +71,20 @@ public class LoginActivity extends AppCompatActivity implements Callback {
         editor = sharedPreferences.edit();
         logUserInfo();
         //generate a random uuid if this is the first time the user opens the app...
-        if(sharedPreferences.getString(Constants.USER_UDID, "").equals("")) {
+        if (sharedPreferences.getString(Constants.USER_UDID, "").equals("")) {
             udid = UUID.randomUUID().toString();
             editor.putString(Constants.USER_UDID, udid);
             editor.apply();
-        }else{
+        } else {
             //if this is not the first time... i.e. we have a UDID stored -> retrive it...
             udid = sharedPreferences.getString(Constants.USER_UDID, "");
         }
 //Set up the register button...
-        mRegister = (TextView)findViewById(R.id.register);
+        mRegister = (TextView) findViewById(R.id.register);
         mRegister.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
         this.mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
-                if(actionId == 0){
+                if (actionId == 0) {
                     attemptLogin();
                     return true;
                 }
@@ -167,7 +167,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
             focusView = mEmailView;
         }
 
-        if(TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
@@ -180,10 +180,10 @@ public class LoginActivity extends AppCompatActivity implements Callback {
             focusView.requestFocus();
         } else {
             userEmailVerified = email;
-            Log.d(TAG,"|"+email);
+            Log.d(TAG, "|" + email);
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            if(isNetworkAvailable()) {
+            if (isNetworkAvailable()) {
                 showProgress(true);
                 final JSONObject myJson = new JSONObject();
                 try {
@@ -193,22 +193,24 @@ public class LoginActivity extends AppCompatActivity implements Callback {
 
                     post("https://api.studentsins.com/v1/auth", myJson.toString());
 
-                }catch (IOException e ) {
+                } catch (IOException e) {
                     e.printStackTrace();
-                }catch (JSONException j) {
+                } catch (JSONException j) {
                     j.printStackTrace();
                 }
-            }else{
-                Toast.makeText(LoginActivity.this,"No internet connection!",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(LoginActivity.this, "No internet connection!", Toast.LENGTH_LONG).show();
             }
         }
     }
-//Method to validate an email...
+
+    //Method to validate an email...
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         return email.contains("@");
     }
-//Method to validate a password...
+
+    //Method to validate a password...
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() >= 8;
@@ -260,7 +262,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
 
     @Override
     public void onFailure(Call call, IOException e) {
-        Log.d(TAG,"OnFailure "+e.getMessage());
+        Log.d(TAG, "OnFailure " + e.getMessage());
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -269,7 +271,8 @@ public class LoginActivity extends AppCompatActivity implements Callback {
             }
         });
     }
-//Method to handle the response from the server...
+
+    //Method to handle the response from the server...
     @Override
     public void onResponse(Call call, Response response) throws IOException {
         runOnUiThread(new Runnable() {
@@ -278,11 +281,11 @@ public class LoginActivity extends AppCompatActivity implements Callback {
                 showProgress(false);
             }
         });
-        Log.d(TAG,"OnResponse "+response.toString());
+        Log.d(TAG, "OnResponse " + response.toString());
         isPostRequestSuccessful = response.isSuccessful();
         Log.d(TAG, "WAS THIS LOGIN REQUEST SUCCESSFUL: " + isPostRequestSuccessful);
 
-        if(isPostRequestSuccessful) {
+        if (isPostRequestSuccessful) {
             try {
                 final JSONObject responseJson = new JSONObject(response.body().string());
                 isSuccessfulLogin = responseJson.getBoolean("success");
@@ -319,15 +322,13 @@ public class LoginActivity extends AppCompatActivity implements Callback {
                     }
 
                 });
-            }catch (JSONException j){
+            } catch (JSONException j) {
                 j.printStackTrace();
             }
-        }else{
+        } else {
             showErrorConnectingToServerDialog();
         }
     }
-
-
 
 
     private void post(String url, String json) throws IOException {
@@ -370,7 +371,7 @@ public class LoginActivity extends AppCompatActivity implements Callback {
     private void showIncorrectUsernameOrPasswordDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
         builder.setTitle(getString(R.string.error_dialog_title_incorrect_credentials));
-        builder.setMessage("There was an error while logging you in. "+message+"!\nNOTE:Please make sure" +
+        builder.setMessage("There was an error while logging you in. " + message + "!\nNOTE:Please make sure" +
                 " that the account is activated -> check your email.");
         builder.setPositiveButton(getString(R.string.error_dialog_positive_button_connection_to_server), null);
         AlertDialog dialog = builder.show();
@@ -378,24 +379,24 @@ public class LoginActivity extends AppCompatActivity implements Callback {
     }
 
     private void navigateToApp() {
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
 
-    private void logUserInfo(){
-        String userEmail = sharedPreferences.getString(Constants.USER_EMAIL,"");
-        String userUDID = sharedPreferences.getString(Constants.USER_UDID,"");
+    private void logUserInfo() {
+        String userEmail = sharedPreferences.getString(Constants.USER_EMAIL, "");
+        String userUDID = sharedPreferences.getString(Constants.USER_UDID, "");
         Boolean userIfLoggedIn = sharedPreferences.getBoolean(Constants.USER_IF_LOG_IN, false);
-        String userToken = sharedPreferences.getString(Constants.USER_TOKEN,"");
-        Log.d(TAG,"*********USER*******************");
-        Log.d(TAG,"user UUID: " + userUDID);
-        Log.d(TAG,"is user logged in: " + userIfLoggedIn);
-        Log.d(TAG,"user token: " +userToken);
-        Log.d(TAG,"user email: " + userEmail);
-        Log.d(TAG,"*******END OF THIS USER*********");
+        String userToken = sharedPreferences.getString(Constants.USER_TOKEN, "");
+        Log.d(TAG, "*********USER*******************");
+        Log.d(TAG, "user UUID: " + userUDID);
+        Log.d(TAG, "is user logged in: " + userIfLoggedIn);
+        Log.d(TAG, "user token: " + userToken);
+        Log.d(TAG, "user email: " + userEmail);
+        Log.d(TAG, "*******END OF THIS USER*********");
     }
 }
 

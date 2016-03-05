@@ -15,17 +15,18 @@ import com.studentsins.lust.UI.SnapshotFragment;
  */
 public class LustFragmentPagerAdapter extends android.support.v4.app.FragmentPagerAdapter {
     final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[]{"Snapshot","Feed","Events"};
+    private String tabTitles[] = new String[]{"Snapshot", "Feed", "Events"};
     private Context mContext;
 
     public LustFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         mContext = context;
     }
-//Instantiate the fragments...
+
+    //Instantiate the fragments...
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 return SnapshotFragment.newInstance(0);
             case 1:
@@ -37,12 +38,14 @@ public class LustFragmentPagerAdapter extends android.support.v4.app.FragmentPag
 
         return null;
     }
-//Return the number of pages...
+
+    //Return the number of pages...
     @Override
     public int getCount() {
         return PAGE_COUNT;
     }
-//Set up the page's titles...
+
+    //Set up the page's titles...
     @Override
     public CharSequence getPageTitle(int position) {
         return tabTitles[position];

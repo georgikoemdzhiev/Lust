@@ -13,7 +13,7 @@ public class LustApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Log.d(LustApplication.class.getSimpleName(),"onCreate - Application");
+        Log.d(LustApplication.class.getSimpleName(), "onCreate - Application");
     }
 
 }

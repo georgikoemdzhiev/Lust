@@ -21,10 +21,10 @@ import java.util.ArrayList;
  * Created by koemdzhiev on 07/02/16.
  */
 public class EventsFragment extends Fragment {
+    public static final String ARG_PAGE = "ARG_PAGE";
     private RecyclerView mRecyclerView;
     private Context mActivity;
     private int mPage;
-    public static final String ARG_PAGE = "ARG_PAGE";
 
     // Method that returns a new instance of the fragment - recommended way of creating a fragment
     public static EventsFragment newInstance(int page) {
@@ -42,10 +42,11 @@ public class EventsFragment extends Fragment {
         mActivity = getActivity();
         Log.d("MainActivity", "onCreate");
     }
-//OnCreateView - set up the recycler view and display content
+
+    //OnCreateView - set up the recycler view and display content
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_events_layout,container,false);
+        View view = inflater.inflate(R.layout.fragment_events_layout, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.eventsCardViewList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
@@ -65,7 +66,7 @@ public class EventsFragment extends Fragment {
         users.add("42Bellow");
 
 
-        EventsCardAdapter adapter = new EventsCardAdapter(users,mActivity);
+        EventsCardAdapter adapter = new EventsCardAdapter(users, mActivity);
 
         mRecyclerView.setAdapter(adapter);
         Log.d("MainActivity", "onCreateView");

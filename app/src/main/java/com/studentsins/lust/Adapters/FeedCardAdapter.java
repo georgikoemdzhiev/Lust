@@ -19,9 +19,10 @@ import java.util.ArrayList;
  * Created by koemdzhiev on 10/02/16.
  */
 public class FeedCardAdapter extends RecyclerView.Adapter<FeedCardAdapter.CardViewHolder> {
-    private ArrayList<String> users;
     public Context mContext;
-//Constructor...
+    private ArrayList<String> users;
+
+    //Constructor...
     public FeedCardAdapter(ArrayList<String> users, Context context) {
         this.users = users;
         mContext = context;
@@ -29,16 +30,18 @@ public class FeedCardAdapter extends RecyclerView.Adapter<FeedCardAdapter.CardVi
 
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.feed_card_layout,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.feed_card_layout, parent, false);
 
         return new CardViewHolder(view);
     }
+
     //Set up the list item data...
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
         String name = users.get(position);
         holder.mUserName.setText(name);
     }
+
     //Return the size of the list...
     @Override
     public int getItemCount() {
@@ -52,8 +55,8 @@ public class FeedCardAdapter extends RecyclerView.Adapter<FeedCardAdapter.CardVi
 
         public CardViewHolder(View itemView) {
             super(itemView);
-            mUserName = (TextView)itemView.findViewById(R.id.vendor_name);
-            mToolbar = (Toolbar)itemView.findViewById(R.id.event_toolbar);
+            mUserName = (TextView) itemView.findViewById(R.id.vendor_name);
+            mToolbar = (Toolbar) itemView.findViewById(R.id.event_toolbar);
             mToolbar.inflateMenu(R.menu.menu_feed_user);
 
             mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {

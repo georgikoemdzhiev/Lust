@@ -20,18 +20,18 @@ import com.studentsins.lust.Adapters.LustFragmentPagerAdapter;
 import com.studentsins.lust.R;
 import com.studentsins.lust.Utils.Constants;
 import com.studentsins.lust.Utils.ListenerCollection;
+
 /*
  * This class will hold the main functionality associated with the tree fragments.
  * It will host methods/date the fragments
  */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-    private SharedPreferences sharedPreferences;
-    private  SharedPreferences.Editor editor;
-    private FloatingActionButton mChangeStatus, mCreatePlan;
     public static FloatingActionsMenu mFloatingActionsMenu;
     public static AppBarLayout appBarLayout;
-
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private FloatingActionButton mChangeStatus, mCreatePlan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         editor = sharedPreferences.edit();
 
-       Boolean isUserLoggedIn = sharedPreferences.getBoolean(Constants.USER_IF_LOG_IN,false);
-        if(!isUserLoggedIn){
+        Boolean isUserLoggedIn = sharedPreferences.getBoolean(Constants.USER_IF_LOG_IN, false);
+        if (!isUserLoggedIn) {
             navigateToLogin();
         }
 
@@ -59,24 +59,24 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setupWithViewPager(viewPager);
 
-        appBarLayout = (AppBarLayout)findViewById(R.id.appBarLayouy);
+        appBarLayout = (AppBarLayout) findViewById(R.id.appBarLayouy);
 //Set up the floating action menu...
-        mFloatingActionsMenu = (FloatingActionsMenu)findViewById(R.id.floatingActionMenu);
+        mFloatingActionsMenu = (FloatingActionsMenu) findViewById(R.id.floatingActionMenu);
 //Set up the status change floating action button...
-        mChangeStatus = (FloatingActionButton)findViewById(R.id.changeStatusBtn);
+        mChangeStatus = (FloatingActionButton) findViewById(R.id.changeStatusBtn);
         mChangeStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG,"Change Status pressed! | " + viewPager.getCurrentItem());
+                Log.d(TAG, "Change Status pressed! | " + viewPager.getCurrentItem());
                 mFloatingActionsMenu.collapse();
             }
         });
         //Set up the create plan floating action button...
-        mCreatePlan = (FloatingActionButton)findViewById(R.id.createPlanBtn);
+        mCreatePlan = (FloatingActionButton) findViewById(R.id.createPlanBtn);
         mCreatePlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG,"Create plan pressed! | " + viewPager.getCurrentItem());
+                Log.d(TAG, "Create plan pressed! | " + viewPager.getCurrentItem());
                 mFloatingActionsMenu.collapse();
             }
         });
@@ -91,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-//Handle menu item clicks...
+
+    //Handle menu item clicks...
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -104,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         }
-        if(id == R.id.action_logout){
-            editor.putBoolean(Constants.USER_IF_LOG_IN,false);
+        if (id == R.id.action_logout) {
+            editor.putBoolean(Constants.USER_IF_LOG_IN, false);
             editor.apply();
             navigateToLogin();
             return true;
@@ -113,26 +114,27 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-//Method to transfer the user to the log in page...
+
+    //Method to transfer the user to the log in page...
     private void navigateToLogin() {
-        Intent intent = new Intent(this,LoginActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
 
-//Method intended for debugging purposes - it prints the details of the log in user...
-    private void logUserInfo(){
+    //Method intended for debugging purposes - it prints the details of the log in user...
+    private void logUserInfo() {
         String userEmail = sharedPreferences.getString(Constants.USER_EMAIL, "");
-        String userUDID = sharedPreferences.getString(Constants.USER_UDID,"");
+        String userUDID = sharedPreferences.getString(Constants.USER_UDID, "");
         Boolean userIfLoggedIn = sharedPreferences.getBoolean(Constants.USER_IF_LOG_IN, false);
-        String userToken = sharedPreferences.getString(Constants.USER_TOKEN,"");
-        Log.d(TAG,"*********USER*******************");
-        Log.d(TAG,"user UUID: " + userUDID);
-        Log.d(TAG,"is user logged in: " + userIfLoggedIn);
-        Log.d(TAG,"user token: " +userToken);
-        Log.d(TAG,"user email: " + userEmail);
-        Log.d(TAG,"*******END OF THIS USER*********");
+        String userToken = sharedPreferences.getString(Constants.USER_TOKEN, "");
+        Log.d(TAG, "*********USER*******************");
+        Log.d(TAG, "user UUID: " + userUDID);
+        Log.d(TAG, "is user logged in: " + userIfLoggedIn);
+        Log.d(TAG, "user token: " + userToken);
+        Log.d(TAG, "user email: " + userEmail);
+        Log.d(TAG, "*******END OF THIS USER*********");
     }
 }

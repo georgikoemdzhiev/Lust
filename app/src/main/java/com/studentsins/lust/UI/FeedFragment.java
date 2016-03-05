@@ -44,7 +44,7 @@ public class FeedFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_feed_layout,container,false);
+        View view = inflater.inflate(R.layout.fragment_feed_layout, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.feedCardViewList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
@@ -63,7 +63,7 @@ public class FeedFragment extends Fragment {
         users.add("Alexander Lunar");
         users.add("Awesome Jhon");
 
-        FeedCardAdapter adapter = new FeedCardAdapter(users,mActivity);
+        FeedCardAdapter adapter = new FeedCardAdapter(users, mActivity);
 
         mRecyclerView.setAdapter(adapter);
         Log.d("MainActivity", "onCreateView" + mPage);

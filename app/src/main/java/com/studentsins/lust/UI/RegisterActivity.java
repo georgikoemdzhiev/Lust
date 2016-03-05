@@ -18,29 +18,34 @@ import android.widget.TextView;
 
 import com.studentsins.lust.R;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * This class holds the functionality for log in
  * A login screen that offers login via email/password.
  */
 public class RegisterActivity extends AppCompatActivity {
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     // UI references.
-    private EditText mFirstName,mSecondName,mUserName,mEmailView,mPasswordView;
+    private EditText mFirstName, mSecondName, mUserName, mEmailView, mPasswordView;
     private TextView mLoginLink;
-    private View mLoginFormView,mProgressView;
+    private View mLoginFormView, mProgressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         // Set up the register form.
-        mFirstName = (EditText)findViewById(R.id.first_name);
-        mSecondName = (EditText)findViewById(R.id.second_name);
-        mUserName = (EditText)findViewById(R.id.user_name);
-        mLoginLink = (TextView)findViewById(R.id.login_link);
+        mFirstName = (EditText) findViewById(R.id.first_name);
+        mSecondName = (EditText) findViewById(R.id.second_name);
+        mUserName = (EditText) findViewById(R.id.user_name);
+        mLoginLink = (TextView) findViewById(R.id.login_link);
         mLoginLink.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -73,8 +78,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -99,21 +102,21 @@ public class RegisterActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
         // Check for a valid first name
-        if(TextUtils.isEmpty(firstName)){
+        if (TextUtils.isEmpty(firstName)) {
             mFirstName.setError(getString(R.string.error_field_required));
             focusView = mFirstName;
             cancel = true;
         }
 
         // Check for a valid second name
-        if(TextUtils.isEmpty(secondName)){
+        if (TextUtils.isEmpty(secondName)) {
             mSecondName.setError(getString(R.string.error_field_required));
             focusView = mSecondName;
             cancel = true;
         }
 
         // Check for a valid user name
-        if(TextUtils.isEmpty(userName)){
+        if (TextUtils.isEmpty(userName)) {
             mUserName.setError(getString(R.string.error_field_required));
             focusView = mUserName;
             cancel = true;
@@ -151,7 +154,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean isEmailValid(String email) {
-        return email.contains("@");
+        Matcher emailMatcher = EMAIL_PATTERN.matcher(email);
+        return emailMatcher.matches();
     }
 
     private boolean isPasswordValid(String password) {
