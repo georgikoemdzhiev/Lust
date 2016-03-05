@@ -15,12 +15,13 @@ import com.studentsins.lust.R;
 import java.util.ArrayList;
 
 /**
+ * Adapter class to handle the event's recycler view
  * Created by koemdzhiev on 10/02/16.
  */
 public class EventsCardAdapter extends RecyclerView.Adapter<EventsCardAdapter.CardViewHolder> {
     private ArrayList<String> eventName;
     public Context mContext;
-
+//Constructor...
     public EventsCardAdapter(ArrayList<String> users, Context context) {
         this.eventName = users;
         mContext = context;
@@ -32,19 +33,19 @@ public class EventsCardAdapter extends RecyclerView.Adapter<EventsCardAdapter.Ca
 
         return new CardViewHolder(view);
     }
-
+//Set up the list item data...
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
         String vendorName = eventName.get(position);
         holder.mVendorName.setText(vendorName);
     }
-
+//Return the size of the list...
     @Override
     public int getItemCount() {
         return eventName.size();
     }
 
-
+//ViewHolder class to hold the list item data...
     public class CardViewHolder extends RecyclerView.ViewHolder {
         protected TextView mVendorName;
         protected Toolbar mToolbar;
