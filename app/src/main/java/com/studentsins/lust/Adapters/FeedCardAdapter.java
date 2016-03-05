@@ -15,12 +15,13 @@ import com.studentsins.lust.R;
 import java.util.ArrayList;
 
 /**
+ * Adapter class to handle the feed's recycler view
  * Created by koemdzhiev on 10/02/16.
  */
 public class FeedCardAdapter extends RecyclerView.Adapter<FeedCardAdapter.CardViewHolder> {
     private ArrayList<String> users;
     public Context mContext;
-
+//Constructor...
     public FeedCardAdapter(ArrayList<String> users, Context context) {
         this.users = users;
         mContext = context;
@@ -32,19 +33,19 @@ public class FeedCardAdapter extends RecyclerView.Adapter<FeedCardAdapter.CardVi
 
         return new CardViewHolder(view);
     }
-
+    //Set up the list item data...
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
         String name = users.get(position);
         holder.mUserName.setText(name);
     }
-
+    //Return the size of the list...
     @Override
     public int getItemCount() {
         return users.size();
     }
 
-
+    //ViewHolder class to hold the list item data...
     public class CardViewHolder extends RecyclerView.ViewHolder {
         protected TextView mUserName;
         protected Toolbar mToolbar;
