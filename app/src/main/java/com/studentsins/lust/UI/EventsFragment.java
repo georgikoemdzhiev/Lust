@@ -17,17 +17,17 @@ import com.studentsins.lust.Utils.ListenerCollection;
 import java.util.ArrayList;
 
 /**
+ * This class will hold the Events fragment functionality
  * Created by koemdzhiev on 07/02/16.
  */
 public class EventsFragment extends Fragment {
-    public static final String ARG_PAGE = "ARG_PAGE";
-    private int mPage;
     private RecyclerView mRecyclerView;
     private Context mActivity;
 
+    // Method that returns a new instance of the fragment - recommended way of creating a fragment
     public static EventsFragment newInstance(int page) {
         Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, page);
+        //args.putInt(ARG_PAGE, page);
         EventsFragment fragment = new EventsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -36,11 +36,11 @@ public class EventsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
+        //mPage = getArguments().getInt(ARG_PAGE);
         mActivity = getActivity();
-        Log.d("MainActivity", "onCreate" + mPage);
+        Log.d("MainActivity", "onCreate");
     }
-
+//OnCreateView - set up the recycler view and display content
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_events_layout,container,false);
@@ -66,7 +66,7 @@ public class EventsFragment extends Fragment {
         EventsCardAdapter adapter = new EventsCardAdapter(users,mActivity);
 
         mRecyclerView.setAdapter(adapter);
-        Log.d("MainActivity", "onCreateView" + mPage);
+        Log.d("MainActivity", "onCreateView");
 
         return view;
     }
