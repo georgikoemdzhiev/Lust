@@ -73,7 +73,10 @@ public class ListenerCollection {
         //setExpanded(boolean expanded, boolean animate)
         MainActivity.appBarLayout.setExpanded(true, true);
     }
-//progress bar animation listener to handle the progress bar animations in Snapshot fragment
+
+
+
+//cantDecideProgressBarAnimationListener to handle the progress bar animations in Snapshot fragment
     public static Animator.AnimatorListener cantDecideProgressBarAnimationListener =  new  Animator.AnimatorListener() {
         @Override
         public void onAnimationStart(Animator animator) {
@@ -95,7 +98,7 @@ public class ListenerCollection {
         public void onAnimationRepeat(Animator animator) {}
     };
 
-    //progress bar animation listener to handle the progress bar animations in Snapshot fragment
+    //goingOutProgressBarAnimationListener to handle the progress bar animations in Snapshot fragment
     public static Animator.AnimatorListener goingOutProgressBarAnimationListener =  new  Animator.AnimatorListener() {
         @Override
         public void onAnimationStart(Animator animator) {
@@ -116,7 +119,9 @@ public class ListenerCollection {
         @Override
         public void onAnimationRepeat(Animator animator) {}
     };
-//On touch listener to handle the going out, cant decide and staying in circle touches
+/*
+ * On touch listener to handle the going out, cant decide and staying in circle touches
+ */
     public static View.OnTouchListener onTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent event) {
@@ -128,7 +133,7 @@ public class ListenerCollection {
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    //set the other 2 progress bars to 0 -restart them...
+                    //set the other 2 progress bars to 0 - restart them...
                     SnapshotFragment.mGoingOutProgressBar.setProgress(0);
                     //start the cant decide progress bar animation...
                     SnapshotFragment.cantDecideProgressAnimator.start();
@@ -144,7 +149,7 @@ public class ListenerCollection {
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    //set the other 2 progress bars to 0 -restart them...
+                    //set the other 2 progress bars to 0 - restart them...
                     SnapshotFragment.mCantDecideProgressBar.setProgress(0);
                     //start the cant decide progress bar animation...
                     SnapshotFragment.goingOutProgressAnimator.start();

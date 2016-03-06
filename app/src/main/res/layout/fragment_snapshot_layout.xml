@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/goingOutContainer"
-            android:layout_marginBottom="121dp"
+            android:layout_marginBottom="110dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true">
 
@@ -122,8 +122,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cantDecideContainer"
-            android:layout_marginLeft="39dp"
-            android:layout_marginStart="39dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:layout_above="@+id/goingOutContainer"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
