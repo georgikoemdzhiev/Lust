@@ -48,9 +48,11 @@ public class SnapshotFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_snapshot_layout,container,false);
         mCantDecideGg = (ImageView)view.findViewById(R.id.cant_decide_black_circle_bg);
+        //set up the cant decide circle image for touches...
         mCantDecideGg.setOnTouchListener(ListenerCollection.onTouchListener);
 
         mGoingOutDecideGg = (ImageView)view.findViewById(R.id.going_out_black_circle_bg);
+        //set up the going out circle image for touches...
         mGoingOutDecideGg.setOnTouchListener(ListenerCollection.onTouchListener);
 
         mGoingOutProgressBar = (CircleProgressBar)view.findViewById(R.id.goingOutProgressBar);
