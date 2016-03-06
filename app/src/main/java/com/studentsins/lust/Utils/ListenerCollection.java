@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.studentsins.lust.R;
 import com.studentsins.lust.UI.MainActivity;
 import com.studentsins.lust.UI.SnapshotFragment;
 
@@ -73,7 +74,7 @@ public class ListenerCollection {
         MainActivity.appBarLayout.setExpanded(true, true);
     }
 //progress bar animation listener to handle the progress bar animations in Snapshot fragment
-    public static Animator.AnimatorListener progressBarAnimationListener =  new  Animator.AnimatorListener() {
+    public static Animator.AnimatorListener cantDecideProgressBarAnimationListener =  new  Animator.AnimatorListener() {
         @Override
         public void onAnimationStart(Animator animator) {
             SnapshotFragment.mCantDecideProgressBar.setProgress(0);
@@ -93,20 +94,61 @@ public class ListenerCollection {
         @Override
         public void onAnimationRepeat(Animator animator) {}
     };
+
+    //progress bar animation listener to handle the progress bar animations in Snapshot fragment
+    public static Animator.AnimatorListener goingOutProgressBarAnimationListener =  new  Animator.AnimatorListener() {
+        @Override
+        public void onAnimationStart(Animator animator) {
+            SnapshotFragment.mGoingOutProgressBar.setProgress(0);
+        }
+        @Override
+        public void onAnimationEnd(Animator animator) {
+            // Log.d(TAG, "onAnimationEnd");
+            if(SnapshotFragment.mGoingOutProgressBar.getProgress() < 100){
+                SnapshotFragment.mGoingOutProgressBar.setProgress(0);
+            }else {
+                SnapshotFragment.mGoingOutProgressBar.setProgress(100);
+            }
+            //mNumSins.setText(numberOfSins+"");
+        }
+        @Override
+        public void onAnimationCancel(Animator animator) {}
+        @Override
+        public void onAnimationRepeat(Animator animator) {}
+    };
 //On touch listener to handle the going out, cant decide and staying in circle touches
     public static View.OnTouchListener onTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-                SnapshotFragment.cantDecideProgressAnimator.cancel();
-                Log.d(TAG, "ACTION_UP canceled");
+            //if the user pressed the cant decide button...
+            if(view.getId() == R.id.cant_decide_black_circle_bg) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    SnapshotFragment.cantDecideProgressAnimator.cancel();
+                    Log.d(TAG, "ACTION_UP - Cant Decide - canceled");
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    SnapshotFragment.cantDecideProgressAnimator.start();
+                    Log.d(TAG, "ACTION_DOWN - Cant Decide - executed");
+                }
+                return true;
+            }
+            //if the user pressed the going out button...
+            if(view.getId() == R.id.going_out_black_circle_bg) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    SnapshotFragment.goingOutProgressAnimator.cancel();
+                    Log.d(TAG, "ACTION_UP - Going out - canceled");
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    SnapshotFragment.goingOutProgressAnimator.start();
+                    Log.d(TAG, "ACTION_DOWN - Going out - executed");
+                }
+                return true;
             }
 
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                SnapshotFragment.cantDecideProgressAnimator.start();
-                Log.d(TAG, "ACTION_DOWN executed");
-            }
-            return true;
+
+            return false;
         }
     };
 }
