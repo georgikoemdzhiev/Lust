@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,21 +24,7 @@ public class SnapshotFragment extends Fragment {
     public static CircleProgressBar mCantDecideProgressBar;
     public static ObjectAnimator cantDecideProgressAnimator;
 
-    private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-                cantDecideProgressAnimator.cancel();
-                Log.d(TAG, "ACTION_UP canceled");
-            }
 
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                cantDecideProgressAnimator.start();
-                Log.d(TAG, "ACTION_DOWN executed");
-            }
-            return true;
-        }
-    };
 // Method that returns a new instance of the fragment - recommended way of creating a fragment
     public static SnapshotFragment newInstance(int page) {
         Bundle args = new Bundle();
@@ -61,7 +46,7 @@ public class SnapshotFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_snapshot_layout,container,false);
         mCantDecideGg = (ImageView)view.findViewById(R.id.cant_decide_black_circle_bg);
 
-        mCantDecideGg.setOnTouchListener(onTouchListener);
+        mCantDecideGg.setOnTouchListener(ListenerCollection.onTouchListener);
         mCantDecideProgressBar = (CircleProgressBar)view.findViewById(R.id.cantDecideProgressBar);
         //set up the project animator to animate the progress bar from 0 to 100
         cantDecideProgressAnimator = ObjectAnimator.ofFloat(mCantDecideProgressBar, "progress", 0.0f, 100.0f);

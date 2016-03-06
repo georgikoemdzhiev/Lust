@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.studentsins.lust.UI.MainActivity;
 import com.studentsins.lust.UI.SnapshotFragment;
@@ -70,7 +72,7 @@ public class ListenerCollection {
         //setExpanded(boolean expanded, boolean animate)
         MainActivity.appBarLayout.setExpanded(true, true);
     }
-
+//progress bar animation listener to handle the progress bar animations in Snapshot fragment
     public static Animator.AnimatorListener progressBarAnimationListener =  new  Animator.AnimatorListener() {
         @Override
         public void onAnimationStart(Animator animator) {
@@ -90,5 +92,21 @@ public class ListenerCollection {
         public void onAnimationCancel(Animator animator) {}
         @Override
         public void onAnimationRepeat(Animator animator) {}
+    };
+//On touch listener to handle the going out, cant decide and staying in circle touches
+    public static View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                SnapshotFragment.cantDecideProgressAnimator.cancel();
+                Log.d(TAG, "ACTION_UP canceled");
+            }
+
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                SnapshotFragment.cantDecideProgressAnimator.start();
+                Log.d(TAG, "ACTION_DOWN executed");
+            }
+            return true;
+        }
     };
 }
