@@ -128,6 +128,9 @@ public class ListenerCollection {
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    //set the other 2 progress bars to 0 -restart them...
+                    SnapshotFragment.mGoingOutProgressBar.setProgress(0);
+                    //start the cant decide progress bar animation...
                     SnapshotFragment.cantDecideProgressAnimator.start();
                     Log.d(TAG, "ACTION_DOWN - Cant Decide - executed");
                 }
@@ -141,6 +144,9 @@ public class ListenerCollection {
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    //set the other 2 progress bars to 0 -restart them...
+                    SnapshotFragment.mCantDecideProgressBar.setProgress(0);
+                    //start the cant decide progress bar animation...
                     SnapshotFragment.goingOutProgressAnimator.start();
                     Log.d(TAG, "ACTION_DOWN - Going out - executed");
                 }
