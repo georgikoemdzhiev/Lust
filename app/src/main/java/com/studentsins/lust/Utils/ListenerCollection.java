@@ -1,10 +1,12 @@
 package com.studentsins.lust.Utils;
 
+import android.animation.Animator;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.studentsins.lust.UI.MainActivity;
+import com.studentsins.lust.UI.SnapshotFragment;
 
 /**
  * Class to hold any listeners (whenever possible) needed elsewhere in the app.
@@ -68,4 +70,25 @@ public class ListenerCollection {
         //setExpanded(boolean expanded, boolean animate)
         MainActivity.appBarLayout.setExpanded(true, true);
     }
+
+    public static Animator.AnimatorListener progressBarAnimationListener =  new  Animator.AnimatorListener() {
+        @Override
+        public void onAnimationStart(Animator animator) {
+            SnapshotFragment.mCantDecideProgressBar.setProgress(0);
+        }
+        @Override
+        public void onAnimationEnd(Animator animator) {
+            // Log.d(TAG, "onAnimationEnd");
+            if(SnapshotFragment.mCantDecideProgressBar.getProgress() < 100){
+                SnapshotFragment.mCantDecideProgressBar.setProgress(0);
+            }else {
+                SnapshotFragment.mCantDecideProgressBar.setProgress(100);
+            }
+            //mNumSins.setText(numberOfSins+"");
+        }
+        @Override
+        public void onAnimationCancel(Animator animator) {}
+        @Override
+        public void onAnimationRepeat(Animator animator) {}
+    };
 }

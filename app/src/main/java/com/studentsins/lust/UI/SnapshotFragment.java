@@ -1,6 +1,5 @@
 package com.studentsins.lust.UI;
 
-import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.studentsins.lust.R;
+import com.studentsins.lust.Utils.ListenerCollection;
 
 /**
  * This class will hold the functionality for the Snapshot fragment
@@ -22,28 +22,9 @@ public class SnapshotFragment extends Fragment {
     private int mPage;
     private static String TAG;
     private ImageView mCantDecideGg;
-    private CircleProgressBar mCantDecideProgressBar;
-    private ObjectAnimator cantDecideProgressAnimator;
-    private Animator.AnimatorListener progressBarAnimationListener =  new  Animator.AnimatorListener() {
-        @Override
-        public void onAnimationStart(Animator animator) {
-            mCantDecideProgressBar.setProgress(0);
-        }
-        @Override
-        public void onAnimationEnd(Animator animator) {
-            // Log.d(TAG, "onAnimationEnd");
-            if(mCantDecideProgressBar.getProgress() < 100){
-                mCantDecideProgressBar.setProgress(0);
-            }else {
-                mCantDecideProgressBar.setProgress(100);
-            }
-            //mNumSins.setText(numberOfSins+"");
-        }
-        @Override
-        public void onAnimationCancel(Animator animator) {}
-        @Override
-        public void onAnimationRepeat(Animator animator) {}
-    };
+    public static CircleProgressBar mCantDecideProgressBar;
+    public static ObjectAnimator cantDecideProgressAnimator;
+
     private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent event) {
@@ -85,7 +66,7 @@ public class SnapshotFragment extends Fragment {
         //set up the project animator to animate the progress bar from 0 to 100
         cantDecideProgressAnimator = ObjectAnimator.ofFloat(mCantDecideProgressBar, "progress", 0.0f, 100.0f);
         //add the animation listener to the progress animator to check when the progress has started,finished...
-        cantDecideProgressAnimator.addListener(progressBarAnimationListener);
+        cantDecideProgressAnimator.addListener(ListenerCollection.progressBarAnimationListener);
         //set the duration of the animation to 1.2 seconds
         cantDecideProgressAnimator.setDuration(1200);
         Log.d("MainActivity", "onCreateView");

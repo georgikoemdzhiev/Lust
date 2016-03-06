@@ -9,220 +9,222 @@
 
    <android.support.v4.widget.NestedScrollView
        android:layout_width="match_parent"
-       android:layout_height="match_parent">
+       android:fillViewport = "true"
+       android:layout_height="match_parent"
+       app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/goingOutContainer"
+            android:layout_marginBottom="121dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
 
+            <ImageView
+                android:id="@+id/going_out_grey_circle_bg"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/perfect_grey_circle"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"/>
+
+            <ImageView
+                android:id="@+id/going_out_black_circle_bg"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/perfect_black_circle"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
+
+
+
+            <com.studentsins.lust.UI.CircleProgressBar
+                android:id="@+id/goingOutProgressBar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:progress="0"
+                app:progressBarThickness="3dp"
+                android:layout_alignTop="@+id/going_out_grey_circle_bg"
+                android:layout_alignLeft="@+id/going_out_grey_circle_bg"
+                android:layout_alignStart="@+id/going_out_grey_circle_bg"
+                android:layout_alignBottom="@+id/going_out_grey_circle_bg"
+                android:layout_alignRight="@+id/going_out_grey_circle_bg"
+                android:layout_alignEnd="@+id/going_out_grey_circle_bg"/>
+
+            <ImageView
+                android:layout_width="27dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/goingOutIcon"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_local_bar_white_48dp"
+                android:layout_alignTop="@+id/going_out_black_circle_bg"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="35dp"/>
+
+            <LinearLayout
+                android:id="@+id/goingOutNumberCont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/goingOutIcon"
+                android:layout_centerHorizontal="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="@color/dirtyWhite"
+                    android:id="@+id/numberOfGoingOuts"
+                    android:text="10"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="@color/dirtyWhite"
+                    android:text="going out tonight"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/going_out_includingYouContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:visibility="visible"
+                android:layout_below="@+id/goingOutNumberCont">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="including"
+                    android:layout_marginRight="4dp"
+                    android:textColor="@color/dirtyWhite2"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="you"
+                    android:textColor="@color/blood_orange"/>
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cantDecideContainer"
+            android:layout_marginLeft="39dp"
+            android:layout_marginStart="39dp"
+            android:layout_above="@+id/goingOutContainer"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="38dp">
+
+            <ImageView
+                android:id="@+id/cant_decide_grey_circle_bg"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/perfect_grey_circle"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"/>
+
+            <ImageView
+                android:id="@+id/cant_decide_black_circle_bg"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/perfect_black_circle"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
+
+
+
+            <com.studentsins.lust.UI.CircleProgressBar
+                android:id="@+id/cantDecideProgressBar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:progress="0"
+                app:progressBarThickness="3dp"
+                android:layout_alignTop="@+id/cant_decide_grey_circle_bg"
+                android:layout_alignLeft="@+id/cant_decide_grey_circle_bg"
+                android:layout_alignStart="@+id/cant_decide_grey_circle_bg"
+                android:layout_alignBottom="@+id/cant_decide_grey_circle_bg"
+                android:layout_alignRight="@+id/cant_decide_grey_circle_bg"
+                android:layout_alignEnd="@+id/cant_decide_grey_circle_bg"/>
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cantDecideIcon"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/cant_decide"
+                android:layout_alignTop="@+id/cant_decide_black_circle_bg"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="35dp"/>
+
+            <LinearLayout
+                android:id="@+id/cantDecideNumberCont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/cantDecideIcon"
+                android:layout_centerHorizontal="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/dirtyWhite"
+                    android:id="@+id/numberOfCantDecide"
+                    android:text="10"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/dirtyWhite"
+                    android:text="can't decide"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cant_decide_includingYouContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:visibility="visible"
+                android:layout_below="@+id/cantDecideNumberCont">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="including"
+                    android:layout_marginRight="4dp"
+                    android:textColor="@color/dirtyWhite2"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="you"
+                    android:textColor="@color/blood_orange"/>
+            </LinearLayout>
+
+        </RelativeLayout>
     </RelativeLayout>
-
    </android.support.v4.widget.NestedScrollView>
 
-    <RelativeLayout
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:id="@+id/goingOutContainer"
-           android:layout_alignParentBottom="true"
-           android:layout_centerHorizontal="true"
-           android:layout_marginBottom="56dp">
-
-           <ImageView
-               android:id="@+id/going_out_grey_circle_bg"
-               android:layout_width="130dp"
-               android:layout_height="wrap_content"
-               android:src="@drawable/perfect_grey_circle"
-               android:adjustViewBounds="true"
-               android:scaleType="fitXY"/>
-
-           <ImageView
-               android:id="@+id/going_out_black_circle_bg"
-               android:layout_width="125dp"
-               android:layout_height="wrap_content"
-               android:src="@drawable/perfect_black_circle"
-               android:adjustViewBounds="true"
-               android:scaleType="fitXY"
-               android:layout_centerVertical="true"
-               android:layout_centerHorizontal="true"/>
 
 
-
-           <com.studentsins.lust.UI.CircleProgressBar
-               android:id="@+id/goingOutProgressBar"
-               android:layout_width="0dp"
-               android:layout_height="0dp"
-               app:progress="0"
-               app:progressBarThickness="3dp"
-               android:layout_alignTop="@+id/going_out_grey_circle_bg"
-               android:layout_alignLeft="@+id/going_out_grey_circle_bg"
-               android:layout_alignStart="@+id/going_out_grey_circle_bg"
-               android:layout_alignBottom="@+id/going_out_grey_circle_bg"
-               android:layout_alignRight="@+id/going_out_grey_circle_bg"
-               android:layout_alignEnd="@+id/going_out_grey_circle_bg"/>
-
-           <ImageView
-               android:layout_width="27dp"
-               android:layout_height="wrap_content"
-               android:id="@+id/goingOutIcon"
-               android:adjustViewBounds="true"
-               android:scaleType="fitXY"
-               android:src="@drawable/ic_local_bar_white_48dp"
-               android:layout_alignTop="@+id/going_out_black_circle_bg"
-               android:layout_centerHorizontal="true"
-               android:layout_marginTop="35dp"/>
-
-           <LinearLayout
-               android:id="@+id/goingOutNumberCont"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:layout_below="@+id/goingOutIcon"
-               android:layout_centerHorizontal="true">
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="13sp"
-                   android:textColor="@color/dirtyWhite"
-                   android:id="@+id/numberOfGoingOuts"
-                   android:text="10"/>
-
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textSize="12sp"
-                   android:layout_marginLeft="2dp"
-                   android:textColor="@color/dirtyWhite"
-                   android:text="going out tonight"/>
-           </LinearLayout>
-
-           <LinearLayout
-               android:id="@+id/going_out_includingYouContainer"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:layout_centerHorizontal="true"
-               android:visibility="visible"
-               android:layout_below="@+id/goingOutNumberCont">
-
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="including"
-                   android:layout_marginRight="4dp"
-                   android:textColor="@color/dirtyWhite2"/>
-
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="you"
-                   android:textColor="@color/blood_orange"/>
-           </LinearLayout>
-
-
-
-   </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cantDecideContainer"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="35dp"
-        android:layout_marginStart="35dp">
-
-        <ImageView
-            android:id="@+id/cant_decide_grey_circle_bg"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/perfect_grey_circle"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"/>
-
-        <ImageView
-            android:id="@+id/cant_decide_black_circle_bg"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/perfect_black_circle"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
-
-
-
-        <com.studentsins.lust.UI.CircleProgressBar
-            android:id="@+id/cantDecideProgressBar"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:progress="0"
-            app:progressBarThickness="3dp"
-            android:layout_alignTop="@+id/cant_decide_grey_circle_bg"
-            android:layout_alignLeft="@+id/cant_decide_grey_circle_bg"
-            android:layout_alignStart="@+id/cant_decide_grey_circle_bg"
-            android:layout_alignBottom="@+id/cant_decide_grey_circle_bg"
-            android:layout_alignRight="@+id/cant_decide_grey_circle_bg"
-            android:layout_alignEnd="@+id/cant_decide_grey_circle_bg"/>
-
-        <ImageView
-            android:layout_width="13dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/cantDecideIcon"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/cant_decide"
-            android:layout_alignTop="@+id/cant_decide_black_circle_bg"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="35dp"/>
-
-        <LinearLayout
-            android:id="@+id/cantDecideNumberCont"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_below="@+id/cantDecideIcon"
-            android:layout_centerHorizontal="true">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/dirtyWhite"
-                android:id="@+id/numberOfCantDecide"
-                android:text="10"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:layout_marginLeft="3dp"
-                android:textColor="@color/dirtyWhite"
-                android:text="can't decide"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/cant_decide_includingYouContainer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_centerHorizontal="true"
-            android:visibility="visible"
-            android:layout_below="@+id/cantDecideNumberCont">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="including"
-                android:layout_marginRight="4dp"
-                android:textColor="@color/dirtyWhite2"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="you"
-                android:textColor="@color/blood_orange"/>
-        </LinearLayout>
-
-    </RelativeLayout>
 
 </RelativeLayout>
