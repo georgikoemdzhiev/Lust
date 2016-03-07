@@ -22,13 +22,20 @@ public class SnapshotFragment extends Fragment {
     private static String TAG;
     private ImageView mCantDecideGg;
     private ImageView mGoingOutDecideGg;
+    //circular custom progress bar for cant decide button
     public static CircleProgressBar mCantDecideProgressBar;
+    //circular custom progress bar for going out button
     public static CircleProgressBar mGoingOutProgressBar;
+    //progress animator to handle the animation of the cant decide button
     public static ObjectAnimator cantDecideProgressAnimator;
+    //progress animator to handle the animation of the going out button
     public static ObjectAnimator goingOutProgressAnimator;
 
 
-// Method that returns a new instance of the fragment - recommended way of creating a fragment
+/*
+ *   Method that returns a new instance of
+ *   the fragment - recommended way of creating a fragment
+ */
     public static SnapshotFragment newInstance(int page) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
