@@ -232,7 +232,7 @@
             android:layout_marginBottom="38dp">
 
             <ImageView
-                android:id="@+id/takingItEasy_grey_circle_bg"
+                android:id="@+id/taking_it_easy_grey_circle_bg"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/perfect_grey_circle"
@@ -240,7 +240,7 @@
                 android:scaleType="fitXY"/>
 
             <ImageView
-                android:id="@+id/takingItEasy_black_circle_bg"
+                android:id="@+id/taking_It_easy_black_circle_bg"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/perfect_black_circle"
@@ -257,12 +257,12 @@
                 android:layout_height="0dp"
                 app:progress="0"
                 app:progressBarThickness="3dp"
-                android:layout_alignTop="@+id/takingItEasy_grey_circle_bg"
-                android:layout_alignLeft="@+id/takingItEasy_grey_circle_bg"
-                android:layout_alignStart="@+id/takingItEasy_grey_circle_bg"
-                android:layout_alignBottom="@+id/takingItEasy_grey_circle_bg"
-                android:layout_alignRight="@+id/takingItEasy_grey_circle_bg"
-                android:layout_alignEnd="@+id/takingItEasy_grey_circle_bg"/>
+                android:layout_alignTop="@+id/taking_it_easy_grey_circle_bg"
+                android:layout_alignLeft="@+id/taking_it_easy_grey_circle_bg"
+                android:layout_alignStart="@+id/taking_it_easy_grey_circle_bg"
+                android:layout_alignBottom="@+id/taking_it_easy_grey_circle_bg"
+                android:layout_alignRight="@+id/taking_it_easy_grey_circle_bg"
+                android:layout_alignEnd="@+id/taking_it_easy_grey_circle_bg"/>
 
             <ImageView
                 android:layout_width="25dp"
@@ -271,7 +271,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_local_cafe_white_48dp"
-                android:layout_alignTop="@+id/takingItEasy_black_circle_bg"
+                android:layout_alignTop="@+id/taking_It_easy_black_circle_bg"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="35dp"/>
 
