@@ -225,11 +225,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/takingItEasyContainer"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="38dp">
+            android:layout_alignTop="@+id/cantDecideContainer"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="38dp"
+            android:layout_marginEnd="38dp">
 
             <ImageView
                 android:id="@+id/taking_it_easy_grey_circle_bg"
@@ -240,7 +240,7 @@
                 android:scaleType="fitXY"/>
 
             <ImageView
-                android:id="@+id/taking_It_easy_black_circle_bg"
+                android:id="@+id/taking_it_easy_black_circle_bg"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/perfect_black_circle"
@@ -271,7 +271,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_local_cafe_white_48dp"
-                android:layout_alignTop="@+id/taking_It_easy_black_circle_bg"
+                android:layout_alignTop="@+id/taking_it_easy_black_circle_bg"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="35dp"/>
 

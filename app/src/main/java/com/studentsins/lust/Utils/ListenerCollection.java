@@ -125,7 +125,7 @@ public class ListenerCollection {
     public static View.OnTouchListener onTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent event) {
-            //if the user pressed the cant decide button...
+            //if the user pressed the "cant decide" button...
             if(view.getId() == R.id.cant_decide_black_circle_bg) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     SnapshotFragment.cantDecideProgressAnimator.cancel();
@@ -135,13 +135,14 @@ public class ListenerCollection {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     //set the other 2 progress bars to 0 - restart them...
                     SnapshotFragment.mGoingOutProgressBar.setProgress(0);
+                    SnapshotFragment.mTakingItEasyProgressBar.setProgress(0);
                     //start the cant decide progress bar animation...
                     SnapshotFragment.cantDecideProgressAnimator.start();
                     Log.d(TAG, "ACTION_DOWN - Cant Decide - executed");
                 }
                 return true;
             }
-            //if the user pressed the going out button...
+            //if the user pressed the "going out" button...
             if(view.getId() == R.id.going_out_black_circle_bg) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     SnapshotFragment.goingOutProgressAnimator.cancel();
@@ -151,8 +152,27 @@ public class ListenerCollection {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     //set the other 2 progress bars to 0 - restart them...
                     SnapshotFragment.mCantDecideProgressBar.setProgress(0);
+                    SnapshotFragment.mTakingItEasyProgressBar.setProgress(0);
                     //start the cant decide progress bar animation...
                     SnapshotFragment.goingOutProgressAnimator.start();
+                    Log.d(TAG, "ACTION_DOWN - Going out - executed");
+                }
+                return true;
+            }
+
+            //if the user pressed the "taking it easy" button...
+            if(view.getId() == R.id.taking_it_easy_black_circle_bg) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    SnapshotFragment.takingItEasyProgressAnimator.cancel();
+                    Log.d(TAG, "ACTION_UP - Going out - canceled");
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    //set the other 2 progress bars to 0 - restart them...
+                    SnapshotFragment.mGoingOutProgressBar.setProgress(0);
+                    SnapshotFragment.mCantDecideProgressBar.setProgress(0);
+                    //start the cant decide progress bar animation...
+                    SnapshotFragment.takingItEasyProgressAnimator.start();
                     Log.d(TAG, "ACTION_DOWN - Going out - executed");
                 }
                 return true;
