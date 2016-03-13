@@ -221,6 +221,108 @@
             </LinearLayout>
 
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/takingItEasyContainer"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="38dp">
+
+            <ImageView
+                android:id="@+id/takingItEasy_grey_circle_bg"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/perfect_grey_circle"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"/>
+
+            <ImageView
+                android:id="@+id/takingItEasy_black_circle_bg"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/perfect_black_circle"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
+
+
+
+            <com.studentsins.lust.UI.CircleProgressBar
+                android:id="@+id/takingItEasyProgressBar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:progress="0"
+                app:progressBarThickness="3dp"
+                android:layout_alignTop="@+id/takingItEasy_grey_circle_bg"
+                android:layout_alignLeft="@+id/takingItEasy_grey_circle_bg"
+                android:layout_alignStart="@+id/takingItEasy_grey_circle_bg"
+                android:layout_alignBottom="@+id/takingItEasy_grey_circle_bg"
+                android:layout_alignRight="@+id/takingItEasy_grey_circle_bg"
+                android:layout_alignEnd="@+id/takingItEasy_grey_circle_bg"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/takingItEasyIcon"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_local_cafe_white_48dp"
+                android:layout_alignTop="@+id/takingItEasy_black_circle_bg"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="35dp"/>
+
+            <LinearLayout
+                android:id="@+id/takingItEasyNumberCont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/takingItEasyIcon"
+                android:layout_centerHorizontal="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/dirtyWhite"
+                    android:id="@+id/numberOfTakingItEasy"
+                    android:text="10"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/dirtyWhite"
+                    android:text="can't decide"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/takingItEasy_includingYouContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:visibility="visible"
+                android:layout_below="@+id/takingItEasyNumberCont">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="including"
+                    android:layout_marginRight="4dp"
+                    android:textColor="@color/dirtyWhite2"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="you"
+                    android:textColor="@color/blood_orange"/>
+            </LinearLayout>
+
+        </RelativeLayout>
     </RelativeLayout>
    </android.support.v4.widget.NestedScrollView>
 
