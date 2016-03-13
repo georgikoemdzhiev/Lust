@@ -16,6 +16,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <!-- Going out circle button-->
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -118,6 +119,7 @@
 
 
         </RelativeLayout>
+        <!-- Cant decide circle button-->
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -221,6 +223,7 @@
             </LinearLayout>
 
         </RelativeLayout>
+        <!-- Taking it easy circle button-->
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -296,7 +299,7 @@
                     android:textSize="12sp"
                     android:layout_marginLeft="3dp"
                     android:textColor="@color/dirtyWhite"
-                    android:text="can't decide"/>
+                    android:text="Taking it easy"/>
             </LinearLayout>
 
             <LinearLayout
