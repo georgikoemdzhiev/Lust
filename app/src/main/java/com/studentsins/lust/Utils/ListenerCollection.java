@@ -20,16 +20,20 @@ public class ListenerCollection {
     private static final String TAG = ListenerCollection.class.getSimpleName();
     private static boolean isFabShown = true;
 //Listener to handle the showing/hiding of the floating action button - FAB
-    public  static RecyclerView.OnScrollListener showHideFAB = new RecyclerView.OnScrollListener() {
+    public  static RecyclerView.OnScrollListener showHideCollapseFAB = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
+            //collapse the floating action button when scrolling to make sure it is cosed before hiding it...
+            MainActivity.mFloatingActionsMenu.collapse();
+            //hide the floating action button...
             if (dy > 0 && isFabShown) {
                 // Scrolling up
                 Log.d(TAG, "Scrolling UP - RecyclerLayout");
                 hideFAB();
             } else if(dy < 0 && !isFabShown){
                 // Scrolling down
+                //show the floating action button...
                 Log.d(TAG, "Scrolling DOWN - RecyclerLayout");
                 showFAB();
 

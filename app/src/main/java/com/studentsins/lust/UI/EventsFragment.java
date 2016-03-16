@@ -51,7 +51,7 @@ public class EventsFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.addOnScrollListener(ListenerCollection.showHideFAB);
+        mRecyclerView.addOnScrollListener(ListenerCollection.showHideCollapseFAB);
 
         ArrayList<String> users = new ArrayList<>();
         users.add("42Bellow");
