@@ -54,7 +54,8 @@ public class ListenerCollection {
 //            Log.d(TAG,"onPageScrollStateChanded");
         }
     };
-//Helper method to hide the FAB...
+
+    //Helper method to hide the FAB...
     private static void hideFAB() {
         MainActivity.mFloatingActionsMenu.animate()
                 .setDuration(150)
@@ -97,6 +98,27 @@ public class ListenerCollection {
         @Override
         public void onAnimationRepeat(Animator animator) {}
     };
+
+    public static Animator.AnimatorListener takingItEasyProgressBarAnimationListener = new  Animator.AnimatorListener() {
+        @Override
+        public void onAnimationStart(Animator animator) {
+            SnapshotFragment.mTakingItEasyProgressBar.setProgress(0);
+        }
+        @Override
+        public void onAnimationEnd(Animator animator) {
+            // Log.d(TAG, "onAnimationEnd");
+            if(SnapshotFragment.mTakingItEasyProgressBar.getProgress() < 100){
+                SnapshotFragment.mTakingItEasyProgressBar.setProgress(0);
+            }else {
+                SnapshotFragment.mTakingItEasyProgressBar.setProgress(100);
+            }
+            //mNumSins.setText(numberOfSins+"");
+        }
+        @Override
+        public void onAnimationCancel(Animator animator) {}
+        @Override
+        public void onAnimationRepeat(Animator animator) {}
+    };;
 
     //goingOutProgressBarAnimationListener to handle the progress bar animations in Snapshot fragment
     public static Animator.AnimatorListener goingOutProgressBarAnimationListener =  new  Animator.AnimatorListener() {

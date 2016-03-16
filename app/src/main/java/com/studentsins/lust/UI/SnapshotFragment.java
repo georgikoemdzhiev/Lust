@@ -92,7 +92,7 @@ public class SnapshotFragment extends Fragment {
         //set up the project animator to animate the "taking it easy" progress bar from 0 to 100
         takingItEasyProgressAnimator = ObjectAnimator.ofFloat(mTakingItEasyProgressBar, "progress", 0.0f, 100.0f);
         //add the animation listener to the progress animator to check when the progress has started,finished...
-        takingItEasyProgressAnimator.addListener(ListenerCollection.cantDecideProgressBarAnimationListener);
+        takingItEasyProgressAnimator.addListener(ListenerCollection.takingItEasyProgressBarAnimationListener);
         //set the duration of the animation to 1.2 seconds
         takingItEasyProgressAnimator.setDuration(1200);
 
