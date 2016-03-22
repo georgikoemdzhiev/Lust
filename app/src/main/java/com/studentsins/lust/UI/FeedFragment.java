@@ -51,7 +51,7 @@ public class FeedFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.addOnScrollListener(ListenerCollection.showHideCollapseFAB);
-
+//      Test data entries...
         ArrayList<String> users = new ArrayList<>();
         users.add("Andrew Garden");
         users.add("Ben Richnond");
