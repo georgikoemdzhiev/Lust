@@ -51,6 +51,7 @@ public class ListenerCollection {
         @Override
         public void onPageScrollStateChanged(int state) {
             showFAB();
+            MainActivity.mFloatingActionsMenu.collapse();
             //show the toolbar
 
             //expand the toolbar... NOW COMMENTED DUE TO A GOOGLE BUG
