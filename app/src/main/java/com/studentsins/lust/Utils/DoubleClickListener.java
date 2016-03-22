@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.Toast;
 
 /**
+ * Custom onClickListener that implements "Double tap" functionality
  * Created by Georgi on 3/22/2016.
  */
 public abstract class DoubleClickListener implements View.OnClickListener {
