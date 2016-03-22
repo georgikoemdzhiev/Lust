@@ -46,6 +46,8 @@ public class SnapshotFragment extends Fragment {
 
         @Override
         public void onDoubleClick(View view) {
+            //if the user pressed the "cant decide" button...
+            //check if the other two progress bar animators are NOT currently animating...
             if(!(goingOutProgressAnimator.isRunning() || takingItEasyProgressAnimator.isRunning())) {
                 SnapshotFragment.mGoingOutProgressBar.setProgress(0);
                 SnapshotFragment.mTakingItEasyProgressBar.setProgress(0);
@@ -64,7 +66,8 @@ public class SnapshotFragment extends Fragment {
 
         @Override
         public void onDoubleClick(View view) {
-//if the user pressed the "taking it easy" button...
+            //if the user pressed the "going out" button...
+            //check if the other two progress bar animators are NOT currently animating...
             if(!(cantDecideProgressAnimator.isRunning() || takingItEasyProgressAnimator.isRunning())) {
                 SnapshotFragment.mTakingItEasyProgressBar.setProgress(0);
                 SnapshotFragment.mCantDecideProgressBar.setProgress(0);
@@ -83,7 +86,8 @@ public class SnapshotFragment extends Fragment {
 
         @Override
         public void onDoubleClick(View view) {
-            //if the user pressed the "going out" button...
+            //if the user pressed the taking it easy" button...
+            //check if the other two progress bar animators are NOT currently animating...
             if(!(goingOutProgressAnimator.isRunning() || cantDecideProgressAnimator.isRunning())) {
                 SnapshotFragment.mCantDecideProgressBar.setProgress(0);
                 SnapshotFragment.mGoingOutProgressBar.setProgress(0);
