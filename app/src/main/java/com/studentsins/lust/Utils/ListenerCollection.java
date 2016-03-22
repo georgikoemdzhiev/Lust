@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.studentsins.lust.R;
 import com.studentsins.lust.UI.MainActivity;
@@ -149,64 +150,48 @@ public class ListenerCollection {
 /*
  * On touch listener to handle the going out, cant decide and staying in circle touches
  */
-    public static View.OnTouchListener onTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent event) {
-            //if the user pressed the "cant decide" button...
-            if(view.getId() == R.id.cant_decide_black_circle_bg) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    SnapshotFragment.cantDecideProgressAnimator.cancel();
-                    Log.d(TAG, "ACTION_UP - Cant Decide - canceled");
-                }
+    public static View.OnClickListener onTouchListener = new DoubleClickListener() {
+    @Override
+    public void onSingleClick(View v) {
 
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    //set the other 2 progress bars to 0 - restart them...
-                    SnapshotFragment.mGoingOutProgressBar.setProgress(0);
-                    SnapshotFragment.mTakingItEasyProgressBar.setProgress(0);
-                    //start the cant decide progress bar animation...
-                    SnapshotFragment.cantDecideProgressAnimator.start();
-                    Log.d(TAG, "ACTION_DOWN - Cant Decide - executed");
-                }
-                return true;
-            }
-            //if the user pressed the "going out" button...
-            if(view.getId() == R.id.going_out_black_circle_bg) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    SnapshotFragment.goingOutProgressAnimator.cancel();
-                    Log.d(TAG, "ACTION_UP - Going out - canceled");
-                }
+    }
 
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    //set the other 2 progress bars to 0 - restart them...
-                    SnapshotFragment.mCantDecideProgressBar.setProgress(0);
-                    SnapshotFragment.mTakingItEasyProgressBar.setProgress(0);
-                    //start the cant decide progress bar animation...
-                    SnapshotFragment.goingOutProgressAnimator.start();
-                    Log.d(TAG, "ACTION_DOWN - Going out - executed");
-                }
-                return true;
-            }
+    @Override
+    public void onDoubleClick(View view) {
 
-            //if the user pressed the "taking it easy" button...
-            if(view.getId() == R.id.taking_it_easy_black_circle_bg) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    SnapshotFragment.takingItEasyProgressAnimator.cancel();
-                    Log.d(TAG, "ACTION_UP - Going out - canceled");
-                }
+        if(view.getId() == R.id.cant_decide_black_circle_bg) {
 
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    //set the other 2 progress bars to 0 - restart them...
-                    SnapshotFragment.mGoingOutProgressBar.setProgress(0);
-                    SnapshotFragment.mCantDecideProgressBar.setProgress(0);
-                    //start the cant decide progress bar animation...
-                    SnapshotFragment.takingItEasyProgressAnimator.start();
-                    Log.d(TAG, "ACTION_DOWN - Going out - executed");
-                }
-                return true;
-            }
-
-
-            return false;
+            SnapshotFragment.mGoingOutProgressBar.setProgress(0);
+            SnapshotFragment.mTakingItEasyProgressBar.setProgress(0);
+            //start the cant decide progress bar animation...
+            SnapshotFragment.cantDecideProgressAnimator.start();
+            Log.d(TAG, "ACTION_DOWN - Cant Decide - executed");
         }
+        //if the user pressed the "going out" button...
+        if(view.getId() == R.id.going_out_black_circle_bg) {
+
+            SnapshotFragment.mCantDecideProgressBar.setProgress(0);
+            SnapshotFragment.mTakingItEasyProgressBar.setProgress(0);
+            //start the cant decide progress bar animation...
+            SnapshotFragment.goingOutProgressAnimator.start();
+            Log.d(TAG, "ACTION_DOWN - Going out - executed");
+
+        }
+
+        //if the user pressed the "taking it easy" button...
+        if(view.getId() == R.id.taking_it_easy_black_circle_bg) {
+
+            SnapshotFragment.mGoingOutProgressBar.setProgress(0);
+            SnapshotFragment.mCantDecideProgressBar.setProgress(0);
+            //start the cant decide progress bar animation...
+            SnapshotFragment.takingItEasyProgressAnimator.start();
+            Log.d(TAG, "ACTION_DOWN - Going out - executed");
+
+        }
+
+
+    }
+
+
     };
 }

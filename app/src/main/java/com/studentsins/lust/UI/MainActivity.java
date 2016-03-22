@@ -1,5 +1,6 @@
 package com.studentsins.lust.UI;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -120,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-
 
 //Method intended for debugging purposes - it prints the details of the log in user...
     private void logUserInfo(){

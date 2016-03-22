@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.studentsins.lust.R;
+import com.studentsins.lust.Utils.DoubleClickListener;
 import com.studentsins.lust.Utils.ListenerCollection;
 
 /**
@@ -37,6 +38,61 @@ public class SnapshotFragment extends Fragment {
     //progress animator to handle the animation of the "taking it easy" button
     public static ObjectAnimator takingItEasyProgressAnimator;
 
+    private DoubleClickListener cantDecideDoubleTapListener = new DoubleClickListener() {
+        @Override
+        public void onSingleClick(View v) {
+
+        }
+
+        @Override
+        public void onDoubleClick(View view) {
+            if(!(goingOutProgressAnimator.isRunning() || takingItEasyProgressAnimator.isRunning())) {
+                SnapshotFragment.mGoingOutProgressBar.setProgress(0);
+                SnapshotFragment.mTakingItEasyProgressBar.setProgress(0);
+                //start the cant decide progress bar animation...
+                SnapshotFragment.cantDecideProgressAnimator.start();
+                Log.d(TAG, "ACTION_DOWN - Cant Decide - executed");
+            }
+        }
+    };
+
+    private DoubleClickListener goingOutDoubleTapListener = new DoubleClickListener() {
+        @Override
+        public void onSingleClick(View v) {
+
+        }
+
+        @Override
+        public void onDoubleClick(View view) {
+//if the user pressed the "taking it easy" button...
+            if(!(cantDecideProgressAnimator.isRunning() || takingItEasyProgressAnimator.isRunning())) {
+                SnapshotFragment.mTakingItEasyProgressBar.setProgress(0);
+                SnapshotFragment.mCantDecideProgressBar.setProgress(0);
+                //start the cant decide progress bar animation...
+                SnapshotFragment.goingOutProgressAnimator.start();
+                Log.d(TAG, "ACTION_DOWN - Going out - executed");
+            }
+        }
+    };
+
+    private DoubleClickListener takingItEasyDoubleTapListener = new DoubleClickListener() {
+        @Override
+        public void onSingleClick(View v) {
+
+        }
+
+        @Override
+        public void onDoubleClick(View view) {
+            //if the user pressed the "going out" button...
+            if(!(goingOutProgressAnimator.isRunning() || cantDecideProgressAnimator.isRunning())) {
+                SnapshotFragment.mCantDecideProgressBar.setProgress(0);
+                SnapshotFragment.mGoingOutProgressBar.setProgress(0);
+                //start the cant decide progress bar animation...
+                SnapshotFragment.takingItEasyProgressAnimator.start();
+                Log.d(TAG, "ACTION_DOWN - Going out - executed");
+            }
+        }
+    };
 
 /*
  *   Method that returns a new instance of
@@ -62,14 +118,14 @@ public class SnapshotFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_snapshot_layout,container,false);
         mCantDecideBG = (ImageView)view.findViewById(R.id.cant_decide_black_circle_bg);
         //set up the cant decide circle image for touches...
-        mCantDecideBG.setOnTouchListener(ListenerCollection.onTouchListener);
+        mCantDecideBG.setOnClickListener(cantDecideDoubleTapListener);
 
         mGoingOutDecideGg = (ImageView)view.findViewById(R.id.going_out_black_circle_bg);
         //set up the going out circle image for touches...
-        mGoingOutDecideGg.setOnTouchListener(ListenerCollection.onTouchListener);
+        mGoingOutDecideGg.setOnClickListener(goingOutDoubleTapListener);
 
         mTakingItEasyBG = (ImageView)view.findViewById(R.id.taking_it_easy_black_circle_bg);
-        mTakingItEasyBG.setOnTouchListener(ListenerCollection.onTouchListener);
+        mTakingItEasyBG.setOnClickListener(takingItEasyDoubleTapListener);
 
         mGoingOutProgressBar = (CircleProgressBar)view.findViewById(R.id.goingOutProgressBar);
         //set up the project animator to animate the "going out" progress bar from 0 to 100
