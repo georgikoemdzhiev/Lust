@@ -4,11 +4,7 @@ import android.animation.Animator;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Toast;
 
-import com.studentsins.lust.R;
 import com.studentsins.lust.UI.MainActivity;
 import com.studentsins.lust.UI.SnapshotFragment;
 
@@ -97,7 +93,6 @@ public class ListenerCollection {
             }else {
                 SnapshotFragment.mCantDecideProgressBar.setProgress(100);
             }
-            //mNumSins.setText(numberOfSins+"");
         }
         @Override
         public void onAnimationCancel(Animator animator) {}
@@ -118,7 +113,6 @@ public class ListenerCollection {
             }else {
                 SnapshotFragment.mTakingItEasyProgressBar.setProgress(100);
             }
-            //mNumSins.setText(numberOfSins+"");
         }
         @Override
         public void onAnimationCancel(Animator animator) {}
@@ -140,7 +134,6 @@ public class ListenerCollection {
             }else {
                 SnapshotFragment.mGoingOutProgressBar.setProgress(100);
             }
-            //mNumSins.setText(numberOfSins+"");
         }
         @Override
         public void onAnimationCancel(Animator animator) {}
