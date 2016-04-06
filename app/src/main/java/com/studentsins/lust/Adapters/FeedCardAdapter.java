@@ -52,7 +52,7 @@ public class FeedCardAdapter extends RecyclerView.Adapter<FeedCardAdapter.CardVi
 
         public CardViewHolder(View itemView) {
             super(itemView);
-            mUserName = (TextView)itemView.findViewById(R.id.vendor_name);
+            mUserName = (TextView)itemView.findViewById(R.id.user_name);
             mToolbar = (Toolbar)itemView.findViewById(R.id.event_toolbar);
             mToolbar.inflateMenu(R.menu.menu_feed_user);
 

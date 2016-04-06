@@ -63,7 +63,7 @@
             fab:fab_colorNormal="@color/blood_orange"
             fab:fab_title="Create a plan"
             fab:fab_size="normal"
-            app:fab_icon="@drawable/ic_event_white_48dp"
+            app:fab_icon="@drawable/ic_event_white_24dp"
             fab:fab_colorPressed="@color/dirtyWhite"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton

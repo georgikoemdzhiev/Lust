@@ -11,178 +11,120 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingBottom="3dp"
         android:background="@color/card_top_background">
 
-        <RelativeLayout
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:src="@drawable/event_bg"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"/>
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/event_toolbar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingBottom="4dp"
-            android:id="@+id/card_header_container"
-            android:background="@color/card_top_background">
+            android:theme="@style/myToolbarTheme"/>
 
-            <RelativeLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:paddingLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/profile_picture_container">
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/blood_orange"
+                android:text="180 sins going"
+                android:id="@+id/numberOfSinsGoing"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="5dp" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/event_image"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/event_icon"
-                    app:civ_border_width="1dp"
-                    app:civ_border_color="#FFFFFF"/>
-
-            </RelativeLayout>
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/event_toolbar"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
+            <LinearLayout
+                android:paddingLeft="8dp"
+                android:layout_marginTop="3dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/myToolbarTheme"/>
+                android:id="@+id/location_container"
+                android:weightSum="2"
+                android:layout_below="@+id/nameOfEvent"
+                android:gravity="center"
+                android:layout_alignLeft="@+id/nameOfEvent"
+                android:layout_alignStart="@+id/nameOfEvent">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/top_plan_status_container"
-                android:layout_toRightOf="@id/profile_picture_container"
-                android:layout_marginLeft="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:layout_width="13dp"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="42 Bellow"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/white"
-                    android:id="@+id/vendor_name"/>
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/location_container"
-                    android:weightSum="2"
-                    android:gravity="center"
-                    android:layout_below="@+id/vendor_name"
-                    android:layout_alignLeft="@+id/vendor_name"
-                    android:layout_alignStart="@+id/vendor_name">
-
-                    <ImageView
-                        android:scaleType="fitCenter"
-                        android:adjustViewBounds="true"
-                        android:layout_width="13dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/location_icon"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_location_white_48dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="42 Windmill Brae, Aberdeen AB11 6HZ"
-                            android:textSize="12sp"
-                            android:layout_marginLeft="2dp"
-                            android:textColor="@color/dirtyWhite2"
-                            android:id="@+id/location"/>
-                </LinearLayout>
+                    android:id="@+id/location_icon"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_location_on_white_24dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="1:39am Monday 11th January 2016"
-                    android:id="@+id/post_time"
-                    android:textSize="13sp"
-                    android:textColor="@color/grey_light"
-                    android:layout_below="@+id/location_container"/>
-            </RelativeLayout>
-        </RelativeLayout>
-        <!-- Empty layout container to draw the orange line-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:orientation="horizontal"
-            android:layout_above="@+id/event_name_container"
-            android:background="@color/blood_orange">
-
-        </LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/card_header_container"
-            android:id="@+id/event_name_container"
-            android:paddingLeft="7dp"
-            android:paddingRight="7dp"
-            android:background="@color/card_top_background">
-
-            <TextView
-                android:padding="2dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:scrollbars="vertical"
-                android:textColor="@android:color/white"
-                android:text="42 Below Presents DJ MYLES HIGH"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:layout_marginTop="4dp"
-            android:id="@+id/card_content_container"
-            android:layout_below="@+id/event_name_container"
-            android:background="@color/card_top_background">
-
-            <LinearLayout
-                android:layout_width="120dp"
-                android:layout_height="20dp"
-                android:weightSum="2"
-                android:layout_marginRight="5dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true">
-                <Button
-                    android:layout_width="wrap_content"
-                    android:background="@drawable/round_corrners_button"
-                    android:text="Attend"
-                    android:id="@+id/attend_button"
+                    android:text="42 Bellow"
                     android:textSize="14sp"
-                    android:layout_weight="1"
-                    android:textAllCaps="false"
+                    android:layout_marginLeft="2dp"
                     android:textColor="@android:color/white"
-                    android:layout_height="wrap_content"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:background="@drawable/round_corrners_button"
-                    android:text="View"
-                    android:layout_marginLeft="8dp"
-                    android:id="@+id/view_event_button"
-                    android:textSize="14sp"
-                    android:layout_weight="1"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:layout_height="wrap_content"/>
+                    android:id="@+id/user_name"/>
             </LinearLayout>
-            <TextView
+            <LinearLayout
+                android:paddingLeft="8dp"
+                android:layout_marginTop="3dp"
+                android:weightSum="2"
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
-                android:textColor="@color/blood_orange"
-                android:text="180 sins going"
-                android:layout_alignParentTop="true"
-                android:id="@+id/numberOfSinsGoing"
+                android:layout_below="@+id/location_container"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"/>
+                android:layout_alignParentStart="true">
+
+                <ImageView
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:layout_width="12dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_event_white_24dp"/>
+
+                <TextView
+                    android:layout_marginLeft="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="1:39am Monday 11th January 2016"
+                    android:textSize="13sp"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+
+            <TextView
+                android:paddingLeft="8dp"
+                android:id="@+id/nameOfEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="2dp"
+                android:textColor="@android:color/white"
+                android:text="DJ MYLES HIGH"
+                android:layout_below="@+id/numberOfSinsGoing"
+                android:layout_alignLeft="@+id/numberOfSinsGoing"
+                android:layout_alignStart="@+id/numberOfSinsGoing" />
         </RelativeLayout>
-    </RelativeLayout>
+
+        </RelativeLayout>
 
     </android.support.v7.widget.CardView>

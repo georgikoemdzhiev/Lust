@@ -61,7 +61,7 @@
                     android:text="Georgi Koemdzhiev"
                     android:textSize="18sp"
                     android:textColor="@android:color/white"
-                    android:id="@+id/vendor_name"/>
+                    android:id="@+id/user_name"/>
 
 
                 <LinearLayout
@@ -70,9 +70,9 @@
                     android:id="@+id/location_container"
                     android:weightSum="2"
                     android:gravity="center"
-                    android:layout_below="@+id/vendor_name"
-                    android:layout_alignLeft="@+id/vendor_name"
-                    android:layout_alignStart="@+id/vendor_name">
+                    android:layout_below="@+id/user_name"
+                    android:layout_alignLeft="@+id/user_name"
+                    android:layout_alignStart="@+id/user_name">
 
                     <ImageView
                         android:scaleType="fitCenter"
@@ -90,7 +90,7 @@
                             android:textSize="16sp"
                             android:layout_marginLeft="2dp"
                             android:textColor="@color/blood_orange"
-                            android:id="@+id/location"/>
+                            android:id="@+id/user_status"/>
                 </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
