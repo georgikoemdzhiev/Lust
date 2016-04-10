@@ -63,6 +63,24 @@ public class EventsFragment extends Fragment {
         users.add("42Bellow");
         users.add("42Bellow");
         users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
+        users.add("42Bellow");
 
 
         EventsCardAdapter adapter = new EventsCardAdapter(users,mActivity);
