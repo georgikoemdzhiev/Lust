@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:layout_width="60dp"
             android:layout_height="55dp"
-            android:src="@drawable/ic_graphic_eq_white_24dp"/>
+            android:src="@drawable/ic_graphic_eq_white_36dp"/>
 
         <ImageView
             android:scaleType="fitCenter"
@@ -35,6 +35,6 @@
             android:layout_weight="1"
             android:layout_width="60dp"
             android:layout_height="55dp"
-            android:src="@drawable/ic_group_white_24dp"/>
+            android:src="@drawable/ic_group_white_36dp"/>
     </LinearLayout>
 </RelativeLayout>
