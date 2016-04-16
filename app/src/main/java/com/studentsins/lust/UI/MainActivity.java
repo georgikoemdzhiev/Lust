@@ -1,6 +1,5 @@
 package com.studentsins.lust.UI;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,7 +26,7 @@ import com.studentsins.lust.Utils.ListenerCollection;
  */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-    private SharedPreferences sharedPreferences;
+    public static SharedPreferences sharedPreferences;
     private  SharedPreferences.Editor editor;
     private FloatingActionButton mChangeStatus, mCreatePlan;
     public static FloatingActionsMenu mFloatingActionsMenu;
