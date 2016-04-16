@@ -64,7 +64,7 @@ public class FeedFragment extends Fragment implements Callback{
         userToken = MainActivity.sharedPreferences.getString(Constants.USER_TOKEN,"");
         if(!userToken.equals("")){
             //if there is userToken stored...
-            Log.d("FeedFragment", "UserToken: " + userToken);
+            Log.d("FeedFragment. ", "UserToken: " + userToken);
 
             try {
                 feedJson.put("cursor",0);
@@ -119,6 +119,16 @@ public class FeedFragment extends Fragment implements Callback{
     @Override
     public void onResponse(Call call, Response response) throws IOException {
         Log.d("FeedFragment", "onResponse" + response.toString());
+
+        if(response.isSuccessful()){
+            try {
+                JSONObject responseJson = new JSONObject(response.body().string());
+
+                Log.d(TAG,"ResponseJSON: " + responseJson.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
