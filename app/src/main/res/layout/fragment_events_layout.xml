@@ -6,11 +6,35 @@
     android:background="@color/tab_bg">
 
     <android.support.v7.widget.RecyclerView
+        android:layout_above="@+id/tap_container"
         android:id="@+id/eventsCardViewList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="true"
         xmlns:android="http://schemas.android.com/apk/res/android"/>
 
+    <LinearLayout
+        android:id="@+id/tap_container"
+        android:background="@color/card_top_background"
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_weight="1"
+            android:layout_width="60dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_graphic_eq_white_48dp"/>
+
+        <ImageView
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_weight="1"
+            android:layout_width="60dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_group_white_48dp"/>
+    </LinearLayout>
 </RelativeLayout>

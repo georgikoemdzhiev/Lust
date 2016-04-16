@@ -52,7 +52,7 @@ public class EventsCardAdapter extends RecyclerView.Adapter<EventsCardAdapter.Ca
 
         public CardViewHolder(View itemView) {
             super(itemView);
-            mVendorName = (TextView)itemView.findViewById(R.id.vendor_name);
+            mVendorName = (TextView)itemView.findViewById(R.id.user_name);
             mToolbar = (Toolbar)itemView.findViewById(R.id.event_toolbar);
             mToolbar.inflateMenu(R.menu.menu_feed_user);
 
