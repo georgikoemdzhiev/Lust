@@ -59,7 +59,7 @@ public class FeedFragment extends Fragment implements Callback {
         super.onCreate(savedInstanceState);
         mPage = getArguments().getInt(ARG_PAGE);
         mActivity = getActivity();
-
+//TODO  This code bellow will change. It is onCreate just to establish a successful connection to the server. Once that is done, it will be changed.
         //get the saved user token from the shared preferences (it must be saved when the user logs into the app)
         userToken = MainActivity.sharedPreferences.getString(Constants.USER_TOKEN,"");
         if(!userToken.equals("")){
