@@ -27,7 +27,7 @@ import com.studentsins.lust.Utils.ListenerCollection;
  */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-    private SharedPreferences sharedPreferences;
+    public static SharedPreferences sharedPreferences;
     private  SharedPreferences.Editor editor;
     private FloatingActionButton mChangeStatus, mCreatePlan;
     public static FloatingActionsMenu mFloatingActionsMenu;

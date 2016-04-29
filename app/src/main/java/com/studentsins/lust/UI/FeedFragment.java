@@ -12,19 +12,39 @@ import android.view.ViewGroup;
 
 import com.studentsins.lust.Adapters.FeedCardAdapter;
 import com.studentsins.lust.R;
+import com.studentsins.lust.Utils.Constants;
 import com.studentsins.lust.Utils.ListenerCollection;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by koemdzhiev on 07/02/16.
  */
-public class FeedFragment extends Fragment {
+public class FeedFragment extends Fragment implements Callback {
+    //media type object that is required by the okHTTP library to send json data
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     public static final String ARG_PAGE = "ARG_PAGE";
     private static final String TAG = FeedFragment.class.getSimpleName();
     private int mPage;
     private RecyclerView mRecyclerView;
     private Context mActivity;
+    //json object to hold the json data to be send to the server
+    private JSONObject feedJson = new JSONObject();
+    private String userToken;
+    //url of the feed api
+    private final String FEED_URL = "https://api2.studentsins.com/feed";
 
     public static FeedFragment newInstance(int page) {
         Bundle args = new Bundle();
@@ -39,7 +59,28 @@ public class FeedFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mPage = getArguments().getInt(ARG_PAGE);
         mActivity = getActivity();
-        Log.d("MainActivity", "onCreate" + mPage);
+
+        //get the saved user token from the shared preferences (it must be saved when the user logs into the app)
+        userToken = MainActivity.sharedPreferences.getString(Constants.USER_TOKEN,"");
+        if(!userToken.equals("")){
+            //if there is userToken stored...
+            Log.d("FeedFragment. ", "UserToken: " + userToken);
+
+            try {
+                feedJson.put("cursor",0);
+                feedJson.put("user_id",0);
+                feedJson.put("venue_id",0);
+                feedJson.put("token",userToken.trim());
+
+                post(FEED_URL,feedJson.toString());
+
+
+            } catch (JSONException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Log.d("FeedFragment", "onCreate" + mPage);
     }
 
     @Override
@@ -66,7 +107,47 @@ public class FeedFragment extends Fragment {
         FeedCardAdapter adapter = new FeedCardAdapter(users,mActivity);
 
         mRecyclerView.setAdapter(adapter);
-        Log.d("MainActivity", "onCreateView" + mPage);
+        Log.d("FeedFragment", "onCreateView" + mPage);
         return view;
+    }
+
+    @Override
+    public void onFailure(Call call, IOException e) {
+        Log.d("FeedFragment", "onFailure" + e.toString());
+    }
+
+    @Override
+    public void onResponse(Call call, Response response) throws IOException {
+        Log.d("FeedFragment", "onResponse" + response.toString());
+
+        if(response.isSuccessful()){
+            try {
+                JSONObject responseJson = new JSONObject(response.body().string());
+
+                Log.d(TAG,"ResponseJSON: " + responseJson.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Method that will post the json data to the server. The data is in the following format:
+     * "cursor": 0,
+     "user_id": 0,
+     "venue_id": 0,
+     "token": "O@)D...ILhc"
+     * @param url the url to the server - https://api2.studentsins.com/feed/
+     * @param json - the data in a json object that needs to be send to the server
+     * @throws IOException
+     */
+    private void post(String url, String json) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(JSON, json);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(this);
     }
 }
