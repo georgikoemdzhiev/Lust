@@ -61,18 +61,18 @@ public class FeedFragment extends Fragment implements Callback {
         mActivity = getActivity();
 //TODO  This code bellow will change. It is onCreate just to establish a successful connection to the server. Once that is done, it will be changed.
         //get the saved user token from the shared preferences (it must be saved when the user logs into the app)
-        userToken = MainActivity.sharedPreferences.getString(Constants.USER_TOKEN,"");
-        if(!userToken.equals("")){
+        userToken = MainActivity.sharedPreferences.getString(Constants.USER_TOKEN, "");
+        if (!userToken.equals("")) {
             //if there is userToken stored...
             Log.d("FeedFragment. ", "UserToken: " + userToken);
-
+            // Set up the jason...
             try {
-                feedJson.put("cursor",0);
-                feedJson.put("user_id",0);
-                feedJson.put("venue_id",0);
-                feedJson.put("token",userToken.trim());
-
-                post(FEED_URL,feedJson.toString());
+                feedJson.put("cursor", 0);
+                feedJson.put("user_id", 0);
+                feedJson.put("venue_id", 0);
+                feedJson.put("token", userToken.trim());
+                // Post the data to the server
+                post(FEED_URL, feedJson.toString());
 
 
             } catch (JSONException | IOException e) {
@@ -85,7 +85,7 @@ public class FeedFragment extends Fragment implements Callback {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_feed_layout,container,false);
+        View view = inflater.inflate(R.layout.fragment_feed_layout, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.feedCardViewList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
@@ -104,27 +104,44 @@ public class FeedFragment extends Fragment implements Callback {
         users.add("Alexander Lunar");
         users.add("Awesome Jhon");
 
-        FeedCardAdapter adapter = new FeedCardAdapter(users,mActivity);
+        // Instantiate the Feed adapter
+        FeedCardAdapter adapter = new FeedCardAdapter(users, mActivity);
 
         mRecyclerView.setAdapter(adapter);
         Log.d("FeedFragment", "onCreateView" + mPage);
         return view;
     }
 
+    /**
+     * Callback from the Post method.
+     * This Method is called when a connection cannot be established to the
+     * server at all
+     *
+     * @param call
+     * @param e
+     */
     @Override
     public void onFailure(Call call, IOException e) {
         Log.d("FeedFragment", "onFailure" + e.toString());
     }
 
+    /**
+     * Callback from the Post method.
+     * This method is called when the server respond back
+     *
+     * @param call
+     * @param response
+     * @throws IOException
+     */
     @Override
     public void onResponse(Call call, Response response) throws IOException {
         Log.d("FeedFragment", "onResponse" + response.toString());
 
-        if(response.isSuccessful()){
+        if (response.isSuccessful()) {
             try {
                 JSONObject responseJson = new JSONObject(response.body().string());
 
-                Log.d(TAG,"ResponseJSON: " + responseJson.toString());
+                Log.d(TAG, "ResponseJSON: " + responseJson.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -134,10 +151,11 @@ public class FeedFragment extends Fragment implements Callback {
     /**
      * Method that will post the json data to the server. The data is in the following format:
      * "cursor": 0,
-     "user_id": 0,
-     "venue_id": 0,
-     "token": "O@)D...ILhc"
-     * @param url the url to the server - https://api2.studentsins.com/feed/
+     * "user_id": 0,
+     * "venue_id": 0,
+     * "token": "O@)D...ILhc"
+     *
+     * @param url  the url to the server - https://api2.studentsins.com/feed/
      * @param json - the data in a json object that needs to be send to the server
      * @throws IOException
      */
