@@ -78,6 +78,8 @@ public class FeedFragment extends Fragment implements Callback {
             } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
+        }else{
+            Log.d(TAG,"No User Token found!");
         }
 
         Log.d("FeedFragment", "onCreate" + mPage);
