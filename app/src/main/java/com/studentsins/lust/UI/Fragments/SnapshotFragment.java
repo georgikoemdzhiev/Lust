@@ -2,6 +2,7 @@ package com.studentsins.lust.UI.Fragments;
 
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,12 +40,27 @@ public class SnapshotFragment extends Fragment{
     //progress animator to handle the animation of the "taking it easy" button
     public static ObjectAnimator takingItEasyProgressAnimator;
 
+    // Double click listener to perform the circlebar animation on the 3 circle "buttons"
     private DoubleClickListener doubleTapListener = new DoubleClickListener() {
         @Override
-        public void onSingleClick(View v) {}
+        public void onSingleClick(View v) {
+            // increment the click count
+            doubleTapListener.incrementCount();
+            // if the click count is 2 show the user a message what she/he is supposed to do...
+            if(doubleTapListener.getClickCounter() == 2){
+                Snackbar.make(mGoingOutDecideGg,"Double tap to select (:", Snackbar.LENGTH_SHORT).show();
+                // reset the counter...
+                doubleTapListener.setClickCounter(0);
+            }
+
+        }
         @Override
         public void onDoubleClick(View v) {
+            // reset tap counter
+            doubleTapListener.setClickCounter(0);
+            // switch the id of the v...
             switch (v.getId()){
+                // the v id is going out button
                 case R.id.going_out_black_circle_bg:
                     //if the user pressed the "going out" button...
                     //check if the other two progress bar animators are NOT currently animating...
@@ -56,6 +72,7 @@ public class SnapshotFragment extends Fragment{
                         Log.d(TAG, "ACTION_DOWN - Going out - executed");
                     }
                     break;
+                // the v id is cant decide button
                 case R.id.cant_decide_black_circle_bg:
                     //if the user pressed the "cant decide" button...
                     //check if the other two progress bar animators are NOT currently animating...
@@ -67,6 +84,7 @@ public class SnapshotFragment extends Fragment{
                         Log.d(TAG, "ACTION_DOWN - Cant Decide - executed");
                     }
                     break;
+                // the v id is taking it easy button
                 case R.id.taking_it_easy_black_circle_bg:
                     //if the user pressed the taking it easy" button...
                     //check if the other two progress bar animators are NOT currently animating...
@@ -75,10 +93,11 @@ public class SnapshotFragment extends Fragment{
                         SnapshotFragment.mGoingOutProgressBar.setProgress(0);
                         //start the cant decide progress bar animation...
                         SnapshotFragment.takingItEasyProgressAnimator.start();
-                        Log.d(TAG, "ACTION_DOWN - Going out - executed");
+                        Log.d(TAG, "ACTION_DOWN - taking it easy - executed");
                     }
                     break;
             }
+
         }
     };
 

@@ -11,29 +11,32 @@ public abstract class DoubleClickListener implements View.OnClickListener {
     private static final long DOUBLE_CLICK_TIME_DELTA = 300;//milliseconds
 
     long lastClickTime = 0;
-    int tapCount = 0;
+    int clickCounter = 0;
 
     @Override
     public void onClick(View v) {
         long clickTime = System.currentTimeMillis();
         if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_DELTA){
-            tapCount++;
             onDoubleClick(v);
         } else {
             onSingleClick(v);
         }
-       // tapCount = 0;
         lastClickTime = clickTime;
+
     }
 
     public abstract void onSingleClick(View v);
     public abstract void onDoubleClick(View v);
 
-    public int getTapCount() {
-        return tapCount;
+    public int getClickCounter() {
+        return clickCounter;
     }
 
-    public void setTapCount(int tapCount) {
-        this.tapCount = tapCount;
+    public void setClickCounter(int clickCounter) {
+        this.clickCounter = clickCounter;
+    }
+
+    public void incrementCount(){
+        this.clickCounter++;
     }
 }
