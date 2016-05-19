@@ -33,4 +33,5 @@
     <string name="register_login">Click</string>
     <string name="action_search">Search</string>
     <string name="action_notification">Notification</string>
+    <string name="goingOutImage">Going out button</string>
 </resources>

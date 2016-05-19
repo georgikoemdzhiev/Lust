@@ -14,6 +14,7 @@
        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <RelativeLayout
+        android:id="@+id/relativeLayoutMainBG"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <!-- Going out circle button-->
@@ -31,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/perfect_grey_circle"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/goingOutImage"
                 android:scaleType="fitXY"/>
 
             <ImageView
@@ -40,6 +42,7 @@
                 android:src="@drawable/perfect_black_circle"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
+                android:contentDescription="@string/goingOutImage"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"/>
 

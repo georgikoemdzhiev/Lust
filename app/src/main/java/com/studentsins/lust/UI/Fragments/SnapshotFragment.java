@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.studentsins.lust.R;
 import com.studentsins.lust.UI.CircleProgressBar;
+import com.studentsins.lust.UI.MainActivity;
 import com.studentsins.lust.Utils.DoubleClickListener;
 import com.studentsins.lust.Utils.ListenerCollection;
 
@@ -159,6 +160,13 @@ public class SnapshotFragment extends Fragment{
         takingItEasyProgressAnimator.addListener(ListenerCollection.takingItEasyProgressBarAnimationListener);
         //set the duration of the animation to 1.2 seconds
         takingItEasyProgressAnimator.setDuration(1200);
+
+        view.findViewById(R.id.relativeLayoutMainBG).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).mFloatingActionsMenu.collapse();
+            }
+        });
 
         Log.d("MainActivity", "onCreateView");
         return view;
