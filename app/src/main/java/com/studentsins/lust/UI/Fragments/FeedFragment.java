@@ -1,4 +1,4 @@
-package com.studentsins.lust.UI;
+package com.studentsins.lust.UI.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.studentsins.lust.Adapters.FeedCardAdapter;
 import com.studentsins.lust.R;
+import com.studentsins.lust.UI.MainActivity;
 import com.studentsins.lust.Utils.Constants;
 import com.studentsins.lust.Utils.ListenerCollection;
 

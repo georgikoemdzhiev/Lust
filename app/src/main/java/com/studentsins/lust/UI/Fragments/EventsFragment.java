@@ -1,4 +1,4 @@
-package com.studentsins.lust.UI;
+package com.studentsins.lust.UI.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;

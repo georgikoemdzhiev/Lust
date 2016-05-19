@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.studentsins.lust.UI.MainActivity;
-import com.studentsins.lust.UI.SnapshotFragment;
+import com.studentsins.lust.UI.Fragments.SnapshotFragment;
 
 /**
  * Class to hold any listeners (whenever possible) needed elsewhere in the app.

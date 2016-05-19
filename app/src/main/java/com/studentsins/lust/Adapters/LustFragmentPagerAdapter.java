@@ -4,9 +4,9 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-import com.studentsins.lust.UI.EventsFragment;
-import com.studentsins.lust.UI.FeedFragment;
-import com.studentsins.lust.UI.SnapshotFragment;
+import com.studentsins.lust.UI.Fragments.EventsFragment;
+import com.studentsins.lust.UI.Fragments.FeedFragment;
+import com.studentsins.lust.UI.Fragments.SnapshotFragment;
 
 /**
  * Fragment pager adapter to handle the

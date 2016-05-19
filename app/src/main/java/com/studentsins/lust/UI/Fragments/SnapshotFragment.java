@@ -1,4 +1,4 @@
-package com.studentsins.lust.UI;
+package com.studentsins.lust.UI.Fragments;
 
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.studentsins.lust.R;
+import com.studentsins.lust.UI.CircleProgressBar;
 import com.studentsins.lust.Utils.DoubleClickListener;
 import com.studentsins.lust.Utils.ListenerCollection;
 
