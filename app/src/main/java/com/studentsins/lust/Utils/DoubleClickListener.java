@@ -1,7 +1,6 @@
 package com.studentsins.lust.Utils;
 
 import android.view.View;
-import android.widget.Toast;
 
 /**
  * Custom onClickListener that implements "Double tap" functionality
@@ -18,14 +17,10 @@ public abstract class DoubleClickListener implements View.OnClickListener {
     public void onClick(View v) {
         long clickTime = System.currentTimeMillis();
         if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_DELTA){
-            tapCount = 0;
+            tapCount++;
             onDoubleClick(v);
         } else {
-            if(tapCount >= 1) {
-                Toast.makeText(v.getContext(), "Double tap to select :)", Toast.LENGTH_SHORT).show();
-            }
             onSingleClick(v);
-            tapCount++;
         }
        // tapCount = 0;
         lastClickTime = clickTime;
@@ -33,4 +28,12 @@ public abstract class DoubleClickListener implements View.OnClickListener {
 
     public abstract void onSingleClick(View v);
     public abstract void onDoubleClick(View v);
+
+    public int getTapCount() {
+        return tapCount;
+    }
+
+    public void setTapCount(int tapCount) {
+        this.tapCount = tapCount;
+    }
 }
