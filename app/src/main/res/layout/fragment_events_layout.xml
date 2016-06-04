@@ -25,16 +25,16 @@
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:layout_weight="1"
-            android:layout_width="60dp"
-            android:layout_height="55dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
             android:src="@drawable/ic_graphic_eq_white_48dp"/>
 
         <ImageView
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:layout_weight="1"
-            android:layout_width="60dp"
-            android:layout_height="55dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
             android:src="@drawable/ic_group_white_48dp"/>
     </LinearLayout>
 </RelativeLayout>
