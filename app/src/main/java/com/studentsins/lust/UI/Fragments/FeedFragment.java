@@ -71,8 +71,8 @@ public class FeedFragment extends Fragment implements Callback {
                 feedJson.put("cursor", 0);
                 feedJson.put("user_id", 0);
                 feedJson.put("venue_id", 0);
-                feedJson.put("token", userToken.trim());
-                // Post the data to the server
+//                feedJson.put("token", userToken.trim());
+//                 Post the data to the server
                 post(FEED_URL, feedJson.toString());
 
 
@@ -125,7 +125,7 @@ public class FeedFragment extends Fragment implements Callback {
      */
     @Override
     public void onFailure(Call call, IOException e) {
-        Log.d("FeedFragment", "onFailure" + e.toString());
+        Log.e("FeedFragment", "onFailure" + e.toString());
     }
 
     /**
@@ -138,13 +138,13 @@ public class FeedFragment extends Fragment implements Callback {
      */
     @Override
     public void onResponse(Call call, Response response) throws IOException {
-        Log.d("FeedFragment", "onResponse" + response.toString());
+        Log.e("FeedFragment", "onResponse - " + response.toString());
 
         if (response.isSuccessful()) {
             try {
                 JSONObject responseJson = new JSONObject(response.body().string());
 
-                Log.d(TAG, "ResponseJSON: " + responseJson.toString());
+                Log.e(TAG, "ResponseJSON: " + responseJson.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -163,8 +163,11 @@ public class FeedFragment extends Fragment implements Callback {
      * @throws IOException
      */
     private void post(String url, String json) throws IOException {
+        Log.e(TAG, "Posting json object");
+
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(JSON, json);
+
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
