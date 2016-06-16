@@ -29,6 +29,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.Credentials;
 
 /**
  * Created by koemdzhiev on 07/02/16.
@@ -43,9 +44,10 @@ public class FeedFragment extends Fragment implements Callback {
     private Context mActivity;
     //json object to hold the json data to be send to the server
     private JSONObject feedJson = new JSONObject();
+
     private String userToken;
     //url of the feed api
-    private final String FEED_URL = "https://api2.studentsins.com/feed";
+    private final String FEED_URL = "https://api2.studentsins.com/feed/";
 
     public static FeedFragment newInstance(int page) {
         Bundle args = new Bundle();
@@ -73,7 +75,8 @@ public class FeedFragment extends Fragment implements Callback {
                 feedJson.put("venue_id", 0);
 //                feedJson.put("token", userToken.trim());
 //                 Post the data to the server
-                post(FEED_URL, feedJson.toString());
+                String credential = Credentials.basic("0", userToken);
+                post(FEED_URL, feedJson.toString(), credential);
 
 
             } catch (JSONException | IOException e) {
@@ -162,14 +165,16 @@ public class FeedFragment extends Fragment implements Callback {
      * @param json - the data in a json object that needs to be send to the server
      * @throws IOException
      */
-    private void post(String url, String json) throws IOException {
+    private void post(String url, String json, String credential) throws IOException {
         Log.e(TAG, "Posting json object");
 
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(JSON, json);
+       // return response.request().newBuilder().header("Authorization", credential).build();
 
         Request request = new Request.Builder()
                 .url(url)
+                .header("Authorization", credential)
                 .post(body)
                 .build();
         client.newCall(request).enqueue(this);
